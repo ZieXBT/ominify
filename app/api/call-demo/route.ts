@@ -127,19 +127,30 @@ export async function POST(request: Request) {
         // Trigger Webhook
         try {
             const webhookUrl = 'https://primary-production-538b.up.railway.app/webhook/omnify';
-            // Don't await this to keep the response fast for the user (fire and forget)
-            fetch(webhookUrl, {
+
+            console.log('🔗 Triggering webhook:', webhookUrl);
+            const webhookResponse = await fetch(webhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     ...leadData,
                     submittedAt: new Date().toISOString(),
                 }),
-            }).catch(err => console.error('Webhook trigger failed:', err));
+            });
 
-            console.log('🔗 Webhook triggered:', webhookUrl);
+            if (webhookResponse.ok) {
+                console.log('✅ Webhook delivered successfully');
+            } else {
+                console.error(`❌ Webhook failed with status: ${webhookResponse.status} ${webhookResponse.statusText}`);
+                try {
+                    const responseText = await webhookResponse.text();
+                    console.error('Webhook error response:', responseText);
+                } catch (e) {
+                    console.error('Could not read webhook error response');
+                }
+            }
         } catch (error) {
-            console.error('Error triggering webhook:', error);
+            console.error('❌ Error triggering webhook:', error);
         }
 
         return NextResponse.json({
