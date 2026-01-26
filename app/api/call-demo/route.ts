@@ -124,8 +124,23 @@ export async function POST(request: Request) {
 
         console.log('🚀 New Demo Call Request saved to Airtable:', leadData);
 
-        // TODO: Trigger AI call here
-        // Example with Vapi, Bland.ai, etc.
+        // Trigger Webhook
+        try {
+            const webhookUrl = 'https://primary-production-538b.up.railway.app/webhook/omnify';
+            // Don't await this to keep the response fast for the user (fire and forget)
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...leadData,
+                    submittedAt: new Date().toISOString(),
+                }),
+            }).catch(err => console.error('Webhook trigger failed:', err));
+
+            console.log('🔗 Webhook triggered:', webhookUrl);
+        } catch (error) {
+            console.error('Error triggering webhook:', error);
+        }
 
         return NextResponse.json({
             success: true,
