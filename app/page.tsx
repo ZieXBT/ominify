@@ -69,7 +69,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] md:leading-[1.08] tracking-tighter whitespace-normal lg:whitespace-nowrap"
+              className="text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] md:leading-[1.08] tracking-tighter whitespace-normal lg:whitespace-nowrap"
             >
               Omnify AI books <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">3x more jobs</span> than your voicemail.
             </motion.h1>
