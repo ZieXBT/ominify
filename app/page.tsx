@@ -58,7 +58,7 @@ export default function Home() {
       <main className="w-full relative z-10">
 
         {/* Section 2: Hero + Waitlist - Centered Layout */}
-        <section className="w-full max-w-5xl mx-auto px-6 pt-16 pb-20 md:pt-20 md:pb-28 relative">
+        <section className="w-full max-w-5xl mx-auto px-5 pt-12 pb-16 md:pt-20 md:pb-28 relative">
           {/* Hero glow effects */}
           <div className="absolute top-20 left-1/4 w-72 h-72 bg-emerald-500/20 rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute top-40 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-[150px] pointer-events-none" />
@@ -69,7 +69,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-[1.08] tracking-tight whitespace-normal lg:whitespace-nowrap"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] md:leading-[1.08] tracking-tighter whitespace-normal lg:whitespace-nowrap"
             >
               Omnify AI books <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">3x more jobs</span> than your voicemail.
             </motion.h1>
@@ -79,7 +79,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-xl md:max-w-2xl mx-auto px-2"
             >
               Enter your info. Our AI will research your business, then call you in <span className="text-emerald-400 font-semibold">30 seconds</span> with a pitch so good you'll forget it's not human.
             </motion.p>

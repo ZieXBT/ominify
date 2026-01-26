@@ -294,10 +294,10 @@ export function CallDemoForm() {
             {/* Animated border gradient */}
             <div className="absolute inset-0 rounded-[20px] bg-gradient-to-r from-emerald-500/20 via-transparent to-emerald-500/20 opacity-0 hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="bg-[#0a0a0f]/90 backdrop-blur-xl rounded-[20px] p-6 md:p-8 border border-white/[0.06] relative">
+            <div className="bg-[#0a0a0f]/90 backdrop-blur-xl rounded-[20px] p-5 md:p-8 border border-white/[0.06] relative">
 
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-transparent border border-white/20 mb-4">
+                <div className="text-center mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-md bg-transparent border border-white/20 mb-3 md:mb-4">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-gray-400"></span>
