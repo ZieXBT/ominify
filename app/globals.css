@@ -162,6 +162,7 @@ html {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -169,4 +170,87 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+html.light body {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+html.light .bg-gradient-fixed {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(5, 150, 105, 0.05), transparent),
+    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(4, 120, 87, 0.05), transparent);
+}
+
+html.light .bg-grid-fixed {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+html.light .glass-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+html.light .glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow:
+    0 20px 50px -12px rgba(16, 185, 129, 0.1),
+    0 0 30px -8px rgba(16, 185, 129, 0.08);
+}
+
+/* Light mode text colors */
+html.light .text-white {
+  color: #1e293b !important;
+}
+
+html.light .text-gray-400 {
+  color: #64748b !important;
+}
+
+html.light .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+/* Light mode - global background override */
+html.light {
+  --light-bg: #f8fafc;
+  --light-bg-80: rgba(248, 250, 252, 0.8);
+}
+
+html.light [class*="bg-"][class*="0a0a0f"] {
+  background-color: var(--light-bg) !important;
+}
+
+/* Light mode borders */
+html.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Light mode scrollbar */
+html.light ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.4);
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.6);
+}
+
+/* Light mode selection */
+html.light ::selection {
+  background: rgba(16, 185, 129, 0.2);
+  color: #1e293b;
 }

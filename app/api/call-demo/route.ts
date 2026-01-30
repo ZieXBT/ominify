@@ -102,15 +102,6 @@ export async function POST(request: Request) {
         // Normalize phone number
         const normalizedPhone = phone.replace(/\D/g, '');
 
-        // Check for duplicate in Airtable
-        const isDuplicate = await checkDuplicateInAirtable(normalizedPhone);
-        if (isDuplicate) {
-            return NextResponse.json(
-                { error: 'You have already requested a demo call' },
-                { status: 409 }
-            );
-        }
-
         // Prepare lead data
         const leadData = {
             name: name.trim(),

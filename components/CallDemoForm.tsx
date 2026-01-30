@@ -76,7 +76,7 @@ export function CallDemoForm() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [focusedField, setFocusedField] = useState<string | null>(null);
-    const [countdown, setCountdown] = useState(30);
+    const [countdown, setCountdown] = useState(10);
     const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
     const [showCountryPicker, setShowCountryPicker] = useState(false);
 
@@ -144,7 +144,7 @@ export function CallDemoForm() {
             }
 
             setIsSubmitted(true);
-            setCountdown(30);
+            setCountdown(10);
         } catch {
             setSubmitError('Network error. Check connection.');
         }
@@ -183,102 +183,108 @@ export function CallDemoForm() {
                     ))}
                 </div>
 
-                {/* Phone icon with pulse */}
+                {/* 1. OFFER HIGHLIGHT - Primary Focal Point */}
                 <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-                    className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 relative z-10"
-                >
-                    <motion.div
-                        animate={{ rotate: [0, -10, 10, -10, 0] }}
-                        transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1 }}
-                    >
-                        <PhoneCall className="w-12 h-12 text-white" />
-                    </motion.div>
-                </motion.div>
-
-                <motion.h3
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-2xl font-bold text-white mb-3 relative z-10"
-                >
-                    Get ready — you're about to be amazed
-                </motion.h3>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="text-gray-400 mb-6 relative z-10"
-                >
-                    AI is researching your business right now...
-                </motion.p>
-
-                {/* Countdown Timer */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="relative z-10"
+                    transition={{ delay: 0.2 }}
+                    className="relative z-10 w-full mb-6"
                 >
-                    <div className="w-32 h-32 mx-auto relative">
-                        {/* Progress ring */}
-                        <svg className="w-full h-full transform -rotate-90">
-                            <circle
-                                cx="64"
-                                cy="64"
-                                r="58"
-                                stroke="rgba(16, 185, 129, 0.1)"
-                                strokeWidth="8"
-                                fill="none"
-                            />
-                            <motion.circle
-                                cx="64"
-                                cy="64"
-                                r="58"
-                                stroke="url(#gradient)"
-                                strokeWidth="8"
-                                fill="none"
-                                strokeLinecap="round"
-                                initial={{ strokeDasharray: '364.4', strokeDashoffset: 0 }}
-                                animate={{ strokeDashoffset: (30 - countdown) * (364.4 / 30) }}
-                                transition={{ duration: 1, ease: 'linear' }}
-                            />
-                            <defs>
-                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#10b981" />
-                                    <stop offset="100%" stopColor="#34d399" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        {/* Countdown number */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <motion.span
-                                key={countdown}
-                                initial={{ scale: 1.2, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                className="text-4xl font-bold text-white"
-                            >
-                                {countdown}
-                            </motion.span>
+                    {/* Pricing Hero Card */}
+                    <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/40 rounded-2xl p-5 relative overflow-hidden">
+                        {/* Badge */}
+                        <div className="absolute top-3 right-3">
+                            <span className="bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                Early Adopter
+                            </span>
+                        </div>
+
+                        {/* Main Pricing */}
+                        <div className="text-center mb-3">
+                            <div className="flex items-center justify-center gap-2 mb-1">
+                                <span className="text-4xl font-bold text-white">$199</span>
+                                <span className="text-white/60 text-lg">/mo</span>
+                            </div>
+                            <div className="flex items-center justify-center gap-2">
+                                <span className="text-white/40 text-sm line-through">$399/mo</span>
+                                <span className="text-emerald-400 text-sm font-semibold">50% off forever</span>
+                            </div>
+                        </div>
+
+                        {/* Waitlist Confirmation - Secondary */}
+                        <div className="text-center pt-3 border-t border-emerald-500/20">
+                            <p className="text-emerald-400 text-xs font-medium">
+                                ✓ You're on the waitlist • Launching Feb 20th
+                            </p>
                         </div>
                     </div>
-                    <p className="text-sm text-gray-500 mt-4">seconds</p>
                 </motion.div>
 
-                {/* Status message */}
+                {/* 2. COUNTDOWN - Secondary Focal Point */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.7 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mt-6 relative z-10"
+                    transition={{ delay: 0.4 }}
+                    className="relative z-10 mb-4"
                 >
-                    <Sparkles className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm font-semibold text-emerald-400 tracking-wide">
-                        {countdown > 20 ? 'Scanning your website...' : countdown > 10 ? 'Crafting personalized pitch...' : countdown > 5 ? 'Dialing your number...' : 'Connecting...'}
-                    </span>
+                    {/* Phone icon */}
+                    <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                        className="w-14 h-14 mx-auto mb-3 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/25"
+                    >
+                        <motion.div
+                            animate={{ rotate: [0, -10, 10, -10, 0] }}
+                            transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1 }}
+                        >
+                            <PhoneCall className="w-7 h-7 text-white" />
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Countdown Number */}
+                    <motion.span
+                        key={countdown}
+                        initial={{ scale: 1.3, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="text-5xl font-bold text-white block"
+                    >
+                        {countdown}
+                    </motion.span>
+                    <p className="text-white/50 text-xs mt-1">seconds until your call</p>
+                </motion.div>
+
+                {/* 3. STATUS - Inline Progress Indicator */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="relative z-10 w-full"
+                >
+                    {/* Progress Bar */}
+                    <div className="h-1 bg-white/10 rounded-full mb-2 overflow-hidden">
+                        <motion.div
+                            className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full"
+                            initial={{ width: '0%' }}
+                            animate={{ width: `${Math.min(100, ((10 - countdown) / 10) * 100)}%` }}
+                            transition={{ duration: 0.5 }}
+                        />
+                    </div>
+
+                    {/* Inline Status Text */}
+                    <div className="flex items-center justify-center gap-1.5 text-xs">
+                        <span className={countdown <= 7 ? 'text-emerald-400' : 'text-white/30'}>
+                            {countdown <= 7 ? '✓' : '○'} Scanning
+                        </span>
+                        <span className="text-white/20">→</span>
+                        <span className={countdown <= 4 ? 'text-emerald-400' : 'text-white/30'}>
+                            {countdown <= 4 ? '✓' : '○'} Crafting pitch
+                        </span>
+                        <span className="text-white/20">→</span>
+                        <span className={countdown <= 1 ? 'text-emerald-400' : 'text-white/30'}>
+                            {countdown <= 1 ? '✓' : '○'} Dialing
+                        </span>
+                    </div>
                 </motion.div>
             </motion.div>
         );
