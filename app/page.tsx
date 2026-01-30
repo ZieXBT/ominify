@@ -69,7 +69,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] md:leading-[1.08] tracking-tighter"
+              className="text-[1.4rem] sm:text-4xl md:text-[2.75rem] lg:text-[3rem] font-bold text-white mb-6 leading-[1.15] sm:leading-[1.1] tracking-tight max-w-4xl"
             >
               Omnify AI handles the <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">calls</span> you miss and the <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">follow-ups</span> you forget.
             </motion.h1>
@@ -92,22 +92,22 @@ export default function Home() {
               className="relative mb-6"
             >
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-emerald-400/10 to-emerald-500/20 rounded-full blur-xl" />
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/15 via-emerald-400/5 to-emerald-500/15 rounded-full blur-lg" />
 
               {/* Badge with gradient border */}
-              <div className="relative inline-flex items-center gap-3 text-sm md:text-base font-medium px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/30 backdrop-blur-sm">
-                <span className="flex items-center gap-2">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                  </span>
-                  <span className="text-white/90">Works</span>
-                  <span className="text-emerald-400 font-bold">24/7</span>
-                </span>
-                <span className="text-white/50">•</span>
+              <div className="relative inline-flex items-center gap-3 text-base font-medium px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/25 backdrop-blur-sm">
                 <span className="flex items-center gap-1.5">
-                  <span className="text-white/90">Just</span>
-                  <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent font-bold text-lg">$6/day</span>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span className="text-white/80">Works</span>
+                  <span className="text-emerald-400 font-semibold">24/7</span>
+                </span>
+                <span className="text-white/40">•</span>
+                <span className="flex items-center gap-1">
+                  <span className="text-white/80">Just</span>
+                  <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent font-bold">$6/day</span>
                 </span>
               </div>
             </motion.div>
