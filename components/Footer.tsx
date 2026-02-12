@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Zap } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export function Footer() {
@@ -15,9 +15,7 @@ export function Footer() {
                         whileHover={{ x: 2 }}
                     >
                         <Link href="/" className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                                <Zap className="w-4 h-4 text-white" fill="currentColor" />
-                            </div>
+                            <Image src="/omnify-logo.png" alt="Omnify" width={32} height={32} className="w-8 h-8 rounded-xl" />
                             <span className="text-lg font-bold text-white">Omnify</span>
                         </Link>
                     </motion.div>
