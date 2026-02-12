@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
-import { Zap, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function TermsOfService() {
     return (
@@ -14,9 +15,7 @@ export default function TermsOfService() {
             <header className="w-full border-b border-white/[0.06] bg-[#0a0a0f]/80 backdrop-blur-xl sticky top-0 z-50">
                 <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2.5 group">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                            <Zap className="w-4 h-4 text-white" fill="currentColor" />
-                        </div>
+                        <Image src="/omnify-logo.png" alt="Omnify" width={32} height={32} className="w-8 h-8 rounded-xl" />
                         <span className="text-lg font-bold text-white">Omnify</span>
                     </Link>
                     <Link
@@ -283,7 +282,7 @@ export default function TermsOfService() {
                                     <li>
                                         <strong className="text-gray-200">Verbal Opt-In:</strong> End-users may consent to receive messages from
                                         your business verbally — for example, by contacting the phone number listed on your website
-                                        (e.g., <a href="https://omni5crm.com" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-emerald-300">omni5crm.com</a>).
+                                        (e.g., <a href="https://omnifycrm.com" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-emerald-300">omnifycrm.com</a>).
                                         When an end-user calls your business, your team must explicitly inform them that by providing their phone
                                         number and discussing their inquiries, they agree to receive follow-up messages via SMS or other
                                         communication channels related to their request or services offered by your business. This verbal opt-in
@@ -548,8 +547,8 @@ export default function TermsOfService() {
                             </p>
                             <p className="text-gray-400 text-sm mt-1">
                                 Website:{' '}
-                                <a href="https://omni5crm.com" className="text-emerald-400 hover:text-emerald-300 underline">
-                                    omni5crm.com
+                                <a href="https://omnifycrm.com" className="text-emerald-400 hover:text-emerald-300 underline">
+                                    omnifycrm.com
                                 </a>
                             </p>
                         </div>

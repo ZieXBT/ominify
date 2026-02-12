@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
-import { Zap, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function PrivacyPolicy() {
     return (
@@ -14,9 +15,7 @@ export default function PrivacyPolicy() {
             <header className="w-full border-b border-white/[0.06] bg-[#0a0a0f]/80 backdrop-blur-xl sticky top-0 z-50">
                 <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2.5 group">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                            <Zap className="w-4 h-4 text-white" fill="currentColor" />
-                        </div>
+                        <Image src="/omnify-logo.png" alt="Omnify" width={32} height={32} className="w-8 h-8 rounded-xl" />
                         <span className="text-lg font-bold text-white">Omnify</span>
                     </Link>
                     <Link
@@ -624,8 +623,8 @@ export default function PrivacyPolicy() {
                             </p>
                             <p className="text-gray-400 text-sm mt-1">
                                 Website:{' '}
-                                <a href="https://omni5crm.com" className="text-emerald-400 hover:text-emerald-300 underline">
-                                    omni5crm.com
+                                <a href="https://omnifycrm.com" className="text-emerald-400 hover:text-emerald-300 underline">
+                                    omnifycrm.com
                                 </a>
                             </p>
                         </div>
