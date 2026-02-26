@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnify Final Pitch Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        omnify: {
+                            accent: '#22C55E',
+                            light: '#dcfce7',
+                            dark: '#16a34a',
+                            text: '#334155'
+                        },
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: none !important;
+            text-size-adjust: none !important;
+            width: 100%;
+            height: 100%;
+        }
+
+
+
+
+
+
+
+
+        /* Specific patterns */
+        .pattern-dots {
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #111827, #374151);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-inner {
+            padding: 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .stat-card {
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        body {
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* Prevent scrolling for premium deck */
+        }
+
+        .deck-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Override old slide container styles */
+        .slide-container {
+            margin-bottom: 0 !important;
+            display: contents;
+            /* Strip it out layout-wise */
+        }
+
+        .title-label {
+            display: none !important;
+            /* Hide titles in premium mode */
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: scale(0.95);
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 0 !important;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 antialiased">
+    <div class="deck-container" id="deck">
+        <div id="slide-wrapper"
+            style="width: 1280px; height: 720px; min-width: 1280px; min-height: 720px; flex-shrink: 0; position: relative; transform-origin: center center;">
+
+            <!-- OPTION 4: Subdued Zen (Focus on single centered visual) -->
+            <div class="slide-container">
+                <div class="title-label">Slide 1: Title (Lots of Negative Space)</div>
+                <div class="slide active bg-white flex flex-col items-center justify-center p-20 relative">
+
+                    <!-- Subtle background circle -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-green-50 to-white -z-10">
+                    </div>
+
+                    <div
+                        class="w-24 h-24 rounded-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 flex items-center justify-center mb-10 z-10">
+                        <div class="w-12 h-12 rounded-full bg-omnify-accent flex items-center justify-center">
+                            <div class="w-4 h-4 bg-white rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <h1
+                        class="font-heading text-[58px] font-bold tracking-tight text-gradient text-center max-w-6xl leading-[1.35] mb-6 pb-2">
+                        AI that handles the leads you miss<br>and the follow-ups you forget.
+                    </h1>
+
+
+                </div>
+
+
+                <!-- OPTION 2: Big Typographic Statement (No Cards) -->
+                <div class="slide-container">
+                    <div class="title-label">Slide 2: The Problem</div>
+                    <div class="slide bg-white flex flex-col p-20 justify-center items-center text-center">
+
+                        <div
+                            class="inline-flex px-4 py-1.5 rounded-full bg-omnify-light text-omnify-dark text-xs font-bold tracking-widest uppercase mb-10">
+                            THE PROBLEM</div>
+
+                        <h1
+                            class="font-heading text-[48px] font-bold tracking-tight text-[#1e293b] leading-[1.25] mb-20 max-w-5xl">
+                            Because phone systems are broken, contractors bleed <span
+                                class="text-omnify-accent text-[54px] px-1">$164,000</span> annually.
+                        </h1>
+
+                        <div class="flex justify-center items-center w-full max-w-4xl divide-x divide-gray-200">
+                            <div class="px-16 flex flex-col items-center">
+                                <div class="font-heading text-7xl font-extrabold text-gray-900 tracking-tight mb-2">
+                                    62%</div>
+                                <div class="text-lg font-medium text-gray-400 uppercase tracking-wider">Unanswered Calls
+                                </div>
+                            </div>
+                            <div class="px-16 flex flex-col items-center">
+                                <div class="font-heading text-7xl font-extrabold text-gray-900 tracking-tight mb-2">
+                                    42<span class="text-4xl text-gray-400 ml-1">hrs</span></div>
+                                <div class="text-lg font-medium text-gray-400 uppercase tracking-wider">Average Response
+                                    Time
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- OPTION 1: Top-Aligned Horizontal Flow (Direct screenshot translation but cleaner) -->
+                <div class="slide-container">
+                    <div class="title-label">Slide 3: The Solution (Like Screenshot)</div>
+                    <div class="slide bg-white flex flex-col p-20 justify-center">
+
+                        <div class="mb-16 text-center">
+                            <div
+                                class="inline-flex px-4 py-1.5 rounded-full bg-omnify-light text-omnify-dark text-xs font-bold tracking-widest uppercase mb-6">
+                                THE SOLUTION</div>
+                            <h2
+                                class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1] mb-6">
+                                Everything you need to <span class="text-omnify-accent">scale.</span>
+                            </h2>
+                            <p class="text-xl text-gray-500 font-medium">
+                                Omnify handles the entire lead lifecycle, from first call to booked appointment,
+                                automatically.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-10">
+                            <!-- Card 1 -->
+                            <div class="flex flex-col items-center text-center">
+                                <div
+                                    class="w-24 h-24 rounded-2xl bg-omnify-light flex items-center justify-center text-omnify-accent mb-6 transition-transform hover:scale-110 duration-300">
+                                    <i data-lucide="phone" class="w-10 h-10"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-900 text-xl mb-2">Never miss a call</h3>
+                                <p class="text-base text-gray-500">AI answers every inbound call within 2 rings,
+                                    24/7/365.
+                                </p>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="flex flex-col items-center text-center">
+                                <div
+                                    class="w-24 h-24 rounded-2xl bg-omnify-light flex items-center justify-center text-omnify-accent mb-6 transition-transform hover:scale-110 duration-300">
+                                    <i data-lucide="target" class="w-10 h-10"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-900 text-xl mb-2">Books while you sleep</h3>
+                                <p class="text-base text-gray-500">Auto-qualifies leads and books appointments directly.
+                                </p>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="flex flex-col items-center text-center">
+                                <div
+                                    class="w-24 h-24 rounded-2xl bg-omnify-light flex items-center justify-center text-omnify-accent mb-6 transition-transform hover:scale-110 duration-300">
+                                    <i data-lucide="zap" class="w-10 h-10"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-900 text-xl mb-2">Instant follow-ups</h3>
+                                <p class="text-base text-gray-500">Automated SMS, email, and call sequences within
+                                    seconds.</p>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="flex flex-col items-center text-center">
+                                <div
+                                    class="w-24 h-24 rounded-2xl bg-omnify-light flex items-center justify-center text-omnify-accent mb-6 transition-transform hover:scale-110 duration-300">
+                                    <i data-lucide="globe" class="w-10 h-10"></i>
+                                </div>
+                                <h3 class="font-bold text-gray-900 text-xl mb-2">Multi-language</h3>
+                                <p class="text-base text-gray-500">Serves Spanish, Chinese, and other language
+                                    customers.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-16 text-center text-gray-400 font-medium">
+                            Up and running in 15 minutes. No manual hectic setups.
+                        </div>
+                    </div>
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 4: The Moat (Single Brain)</div>
+                        <div class="slide bg-white flex flex-row items-stretch relative overflow-hidden">
+
+                            <!-- LEFT COLUMN: Original Brain Diagram (shifted left) -->
+                            <div class="w-[50%] flex flex-col items-center justify-start pt-12 pl-4">
+                                <div class="text-center mb-8 relative z-20">
+                                    <h2
+                                        class="font-heading text-4xl font-extrabold text-[#111827] tracking-tight leading-[1.05] mb-3">
+                                        One brain that <span class="text-[#22C55E]">remembers it all.</span>
+                                    </h2>
+                                    <p class="text-gray-500 font-medium text-base">
+                                        A single intelligence layer beneath all your channels.
+                                    </p>
+                                </div>
+
+                                <div class="relative w-[500px] h-[380px] flex justify-center items-center z-10">
+                                    <!-- Clean Connectors -->
+                                    <div
+                                        class="absolute w-[560px] h-[1px] bg-gray-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                                    </div>
+                                    <div
+                                        class="absolute w-[1px] h-[380px] bg-gray-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                                    </div>
+                                    <div
+                                        class="absolute w-[420px] h-[1px] bg-gray-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45">
+                                    </div>
+                                    <div
+                                        class="absolute w-[420px] h-[1px] bg-gray-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45">
+                                    </div>
+
+                                    <!-- Central Focus Brain -->
+                                    <div
+                                        class="relative w-32 h-32 bg-white rounded-full flex flex-col items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.05)] z-20">
+                                        <svg class="absolute inset-0 w-full h-full transform -rotate-90">
+                                            <circle cx="64" cy="64" r="63" fill="transparent" stroke="#22C55E"
+                                                stroke-width="2" stroke-dasharray="200" stroke-dashoffset="100"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                        <i data-lucide="brain-circuit" class="text-[#22C55E] w-12 h-12 mb-1"></i>
+                                        <span
+                                            class="text-gray-900 text-[9px] font-bold tracking-widest uppercase">SINGLE
+                                            BRAIN</span>
+                                    </div>
+
+                                    <!-- Instagram (Bottom Left) -->
+                                    <div
+                                        class="absolute bottom-[15px] left-[110px] w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <i class="fa-brands fa-instagram text-[#E4405F] text-3xl"></i>
+                                    </div>
+                                    <!-- WhatsApp (Left) -->
+                                    <div
+                                        class="absolute left-[20px] top-1/2 -translate-y-1/2 w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <i class="fa-brands fa-whatsapp text-[#25D366] text-3xl"></i>
+                                    </div>
+                                    <!-- Phone (Top Left) -->
+                                    <div
+                                        class="absolute top-[15px] left-[110px] w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <i data-lucide="phone" class="text-gray-700 w-7 h-7" stroke-width="2"></i>
+                                    </div>
+                                    <!-- SMS (Top Right) -->
+                                    <div
+                                        class="absolute top-[15px] right-[110px] w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <i data-lucide="message-square" class="text-[#A855F7] w-7 h-7"
+                                            stroke-width="2"></i>
+                                    </div>
+                                    <!-- Facebook (Right) -->
+                                    <div
+                                        class="absolute right-[20px] top-1/2 -translate-y-1/2 w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <i class="fa-brands fa-facebook text-[#1877F2] text-3xl"></i>
+                                    </div>
+                                    <!-- Gmail (Bottom Center) -->
+                                    <div
+                                        class="absolute bottom-[5px] left-1/2 -translate-x-1/2 w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <img src="gmail-icon.png" alt="Gmail" class="w-9 h-9 object-contain">
+                                    </div>
+                                    <!-- Web (Bottom Right) -->
+                                    <div
+                                        class="absolute bottom-[15px] right-[110px] w-16 h-16 bg-white border border-gray-100 shadow-[0_10px_20px_rgba(0,0,0,0.05)] rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                                        <i data-lucide="globe-2" class="text-[#0EA5E9] w-7 h-7" stroke-width="1.8"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- DIVIDER -->
+                            <div class="w-[1px] h-[80%] bg-gray-100"></div>
+
+                            <!-- RIGHT COLUMN: Engagement Heatmap from variant7 -->
+                            <div class="w-[50%] flex flex-col items-center justify-start pt-12 pr-4">
+                                <div class="text-center mb-8 relative z-20">
+                                    <h2
+                                        class="font-heading text-4xl font-extrabold text-[#111827] tracking-tight leading-[1.05] mb-3">
+                                        It gets <span class="text-[#22C55E]">smarter</span> over time.
+                                    </h2>
+                                    <p class="text-gray-500 font-medium text-base">
+                                        Self-learning AI that adapts to each lead's preferences.
+                                    </p>
+                                </div>
+
+                                <style>
+                                    .hm-container {
+                                        display: flex;
+                                        gap: 0;
+                                        justify-content: center;
+                                        margin-top: 20px;
+                                    }
+
+                                    .hm-row-labels {
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding-top: 32px;
+                                        gap: 5px;
+                                    }
+
+                                    .hm-row-label {
+                                        height: 46px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-end;
+                                        padding-right: 10px;
+                                        font-size: 13px;
+                                        font-weight: 700;
+                                        color: #6a6a7a;
+                                    }
+
+                                    .hm-row-label svg {
+                                        width: 16px;
+                                        height: 16px;
+                                        margin-right: 5px;
+                                        flex-shrink: 0;
+                                    }
+
+                                    .hm-grid {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 5px;
+                                    }
+
+                                    .hm-col-headers {
+                                        display: flex;
+                                        gap: 5px;
+                                    }
+
+                                    .hm-col-header {
+                                        width: 68px;
+                                        height: 28px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 10px;
+                                        font-weight: 700;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.8px;
+                                        color: #aaa;
+                                    }
+
+                                    .hm-row {
+                                        display: flex;
+                                        gap: 5px;
+                                    }
+
+                                    .hm-cell {
+                                        width: 68px;
+                                        height: 46px;
+                                        border-radius: 6px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 13px;
+                                        font-weight: 800;
+                                        cursor: default;
+                                        position: relative;
+                                    }
+
+                                    .hm-cell.c0 {
+                                        background: #f7f8fa;
+                                        color: #ccc;
+                                    }
+
+                                    .hm-cell.c1 {
+                                        background: #e8f8ee;
+                                        color: #7dcea0;
+                                    }
+
+                                    .hm-cell.c2 {
+                                        background: #c3e8d0;
+                                        color: #27ae60;
+                                    }
+
+                                    .hm-cell.c3 {
+                                        background: #7dcea0;
+                                        color: #fff;
+                                    }
+
+                                    .hm-cell.c4 {
+                                        background: linear-gradient(135deg, #2ecc71, #27ae60);
+                                        color: #fff;
+                                        box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25);
+                                    }
+
+                                    .hm-cell.winner::after {
+                                        content: '★';
+                                        position: absolute;
+                                        top: -3px;
+                                        right: -1px;
+                                        font-size: 9px;
+                                        color: #f39c12;
+                                    }
+
+                                    .hm-insight {
+                                        margin-top: auto;
+                                        margin-bottom: 144px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                        padding: 14px 20px;
+                                        background: linear-gradient(135deg, #2ecc71, #27ae60);
+                                        border-radius: 10px;
+                                    }
+
+                                    .hm-insight-icon {
+                                        width: 30px;
+                                        height: 30px;
+                                        background: rgba(255, 255, 255, 0.2);
+                                        border-radius: 50%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        flex-shrink: 0;
+                                    }
+
+                                    .hm-insight-icon svg {
+                                        width: 14px;
+                                        height: 14px;
+                                        fill: white;
+                                    }
+
+                                    .hm-insight-text {
+                                        font-size: 13px;
+                                        color: white;
+                                        font-weight: 700;
+                                        line-height: 1.5;
+                                        font-family: 'Inter', sans-serif;
+                                    }
+
+                                    .hm-legend {
+                                        display: flex;
+                                        justify-content: center;
+                                        gap: 5px;
+                                        margin-top: 14px;
+                                        align-items: center;
+                                    }
+
+                                    .hm-legend-label {
+                                        font-size: 9px;
+                                        color: #aaa;
+                                        font-weight: 600;
+                                    }
+
+                                    .hm-legend-block {
+                                        width: 20px;
+                                        height: 8px;
+                                        border-radius: 3px;
+                                    }
+
+                                    .hm-legend-block.lb0 {
+                                        background: #f7f8fa;
+                                    }
+
+                                    .hm-legend-block.lb1 {
+                                        background: #e8f8ee;
+                                    }
+
+                                    .hm-legend-block.lb2 {
+                                        background: #c3e8d0;
+                                    }
+
+                                    .hm-legend-block.lb3 {
+                                        background: #7dcea0;
+                                    }
+
+                                    .hm-legend-block.lb4 {
+                                        background: #2ecc71;
+                                    }
+                                </style>
+
+                                <div class="hm-container">
+                                    <div class="hm-row-labels">
+                                        <div class="hm-row-label">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8">
+                                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                                            </svg>
+                                            SMS
+                                        </div>
+                                        <div class="hm-row-label">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8">
+                                                <path
+                                                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                                <polyline points="22,6 12,13 2,6" />
+                                            </svg>
+                                            Email
+                                        </div>
+                                        <div class="hm-row-label">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8">
+                                                <path
+                                                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3" />
+                                            </svg>
+                                            Phone
+                                        </div>
+                                        <div class="hm-row-label">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                                                <line x1="9" y1="9" x2="9.01" y2="9" />
+                                                <line x1="15" y1="9" x2="15.01" y2="9" />
+                                            </svg>
+                                            Social
+                                        </div>
+                                    </div>
+                                    <div class="hm-grid">
+                                        <div class="hm-col-headers">
+                                            <div class="hm-col-header">Morning</div>
+                                            <div class="hm-col-header">Midday</div>
+                                            <div class="hm-col-header">Afternoon</div>
+                                            <div class="hm-col-header">Evening</div>
+                                            <div class="hm-col-header">Night</div>
+                                        </div>
+                                        <div class="hm-row">
+                                            <div class="hm-cell c1">12%</div>
+                                            <div class="hm-cell c2">28%</div>
+                                            <div class="hm-cell c3">45%</div>
+                                            <div class="hm-cell c4 winner">72%</div>
+                                            <div class="hm-cell c2">31%</div>
+                                        </div>
+                                        <div class="hm-row">
+                                            <div class="hm-cell c2">22%</div>
+                                            <div class="hm-cell c1">14%</div>
+                                            <div class="hm-cell c0">5%</div>
+                                            <div class="hm-cell c0">3%</div>
+                                            <div class="hm-cell c0">1%</div>
+                                        </div>
+                                        <div class="hm-row">
+                                            <div class="hm-cell c1">10%</div>
+                                            <div class="hm-cell c2">25%</div>
+                                            <div class="hm-cell c1">18%</div>
+                                            <div class="hm-cell c1">15%</div>
+                                            <div class="hm-cell c0">2%</div>
+                                        </div>
+                                        <div class="hm-row">
+                                            <div class="hm-cell c0">4%</div>
+                                            <div class="hm-cell c0">6%</div>
+                                            <div class="hm-cell c1">11%</div>
+                                            <div class="hm-cell c2">20%</div>
+                                            <div class="hm-cell c3">38%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="hm-legend">
+                                    <span class="hm-legend-label">Low</span>
+                                    <div class="hm-legend-block lb0"></div>
+                                    <div class="hm-legend-block lb1"></div>
+                                    <div class="hm-legend-block lb2"></div>
+                                    <div class="hm-legend-block lb3"></div>
+                                    <div class="hm-legend-block lb4"></div>
+                                    <span class="hm-legend-label">High</span>
+                                </div>
+
+                                <div class="hm-insight">
+                                    <div class="hm-insight-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                                        </svg>
+                                    </div>
+                                    <div class="hm-insight-text">AI finds the hot zone: SMS + Evening = 72% reply rate.
+                                        Shifts all outreach there.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 5: How It Works</div>
+                        <div class="slide bg-white flex flex-col p-20 justify-center relative overflow-hidden">
+
+                            <!-- Header -->
+                            <div class="mb-12 text-center">
+                                <h2
+                                    class="font-heading text-6xl font-extrabold text-[#111827] tracking-tight leading-[1.05] mb-4">
+                                    The AI builds <span class="text-[#22C55E]">context</span> with every touchpoint.
+                                </h2>
+                                <p class="text-gray-500 font-medium text-xl">
+                                    A real example of how Omnify handles a single lead across channels.
+                                </p>
+                            </div>
+
+                            <!-- Timeline Row -->
+                            <div class="relative flex items-start justify-between max-w-5xl mx-auto w-full">
+                                <!-- Horizontal connecting line -->
+                                <div
+                                    class="absolute top-[16px] left-[20px] right-[20px] h-[2px] bg-gradient-to-r from-[#22C55E] via-[#22C55E] to-[#22C55E]/30 z-0">
+                                </div>
+
+                                <!-- Step 1 -->
+                                <div class="relative z-10 flex flex-col items-center w-[18%]">
+                                    <div
+                                        class="w-9 h-9 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_14px_rgba(34,197,94,0.3)] mb-4">
+                                        <span class="text-white text-sm font-bold">1</span>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-[#DCFCE7] text-[#166534] text-[10px] font-bold rounded-full uppercase tracking-wider mb-2">Web
+                                        Form</span>
+                                    <span class="text-[13px] font-bold text-[#111827] mb-1">Day 1</span>
+                                    <p class="text-gray-400 text-[12px] text-center leading-relaxed">John submits form:
+                                        AC repair at 123 Main St</p>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="relative z-10 flex flex-col items-center w-[18%]">
+                                    <div
+                                        class="w-9 h-9 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_14px_rgba(34,197,94,0.3)] mb-4">
+                                        <span class="text-white text-sm font-bold">2</span>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-[#DCFCE7] text-[#166534] text-[10px] font-bold rounded-full uppercase tracking-wider mb-2">SMS
+                                        Auto</span>
+                                    <span class="text-[13px] font-bold text-[#111827] mb-1">Day 1</span>
+                                    <p class="text-gray-400 text-[12px] text-center leading-relaxed">AI texts: "What's
+                                        going on with your system?"<br>John: "15yr Carrier, grinding noise"</p>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="relative z-10 flex flex-col items-center w-[18%]">
+                                    <div
+                                        class="w-9 h-9 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_14px_rgba(34,197,94,0.3)] mb-4">
+                                        <span class="text-white text-sm font-bold">3</span>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-[#DCFCE7] text-[#166534] text-[10px] font-bold rounded-full uppercase tracking-wider mb-2">Phone
+                                        Call</span>
+                                    <span class="text-[13px] font-bold text-[#111827] mb-1">Day 2</span>
+                                    <p class="text-gray-400 text-[12px] text-center leading-relaxed">John calls → AI:
+                                        "Hi John! I see your Carrier AC has a grinding noise."</p>
+                                </div>
+
+                                <!-- Step 4 -->
+                                <div class="relative z-10 flex flex-col items-center w-[18%]">
+                                    <div
+                                        class="w-9 h-9 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_14px_rgba(34,197,94,0.3)] mb-4">
+                                        <span class="text-white text-sm font-bold">4</span>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-[#DCFCE7] text-[#166534] text-[10px] font-bold rounded-full uppercase tracking-wider mb-2">Follow-up</span>
+                                    <span class="text-[13px] font-bold text-[#111827] mb-1">Day 5</span>
+                                    <p class="text-gray-400 text-[12px] text-center leading-relaxed">AI: "Checking in on
+                                        the estimate for your Carrier AC."</p>
+                                </div>
+
+                                <!-- Step 5: Self-Learns -->
+                                <div class="relative z-10 flex flex-col items-center w-[18%]">
+                                    <div
+                                        class="w-9 h-9 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_14px_rgba(34,197,94,0.3)] mb-4">
+                                        <i data-lucide="refresh-cw" class="text-white w-4 h-4" stroke-width="2.5"></i>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-[#22C55E] text-white text-[10px] font-bold rounded-full uppercase tracking-wider mb-2">Self-Learns</span>
+                                    <span class="text-[13px] font-bold text-[#111827] mb-1">Ongoing</span>
+                                    <p class="text-gray-400 text-[12px] text-center leading-relaxed">SMS drops? AI
+                                        detects it and shifts to the channel that converts.</p>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Insight Bar -->
+                            <div
+                                class="mt-auto flex items-center gap-4 max-w-5xl mx-auto w-full bg-gradient-to-r from-[#22C55E] to-[#16A34A] rounded-2xl px-8 py-5 shadow-[0_8px_20px_rgba(34,197,94,0.15)]">
+                                <div
+                                    class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="sparkles" class="text-white w-5 h-5"></i>
+                                </div>
+                                <p class="text-[15px] text-white font-semibold leading-relaxed">
+                                    John never repeated himself. The AI built a complete picture across 4 touchpoints, 3
+                                    channels — and <span class="font-bold">self-learns</span> when a channel stops
+                                    working.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 6: Why Now</div>
+                        <div class="slide bg-white flex flex-col p-24 justify-center">
+
+                            <div class="mb-16">
+                                <h2
+                                    class="font-heading text-6xl font-extrabold text-[#111827] tracking-tight leading-[1.05]">
+                                    The timing is <span class="text-[#22C55E]">perfect.</span>
+                                </h2>
+                            </div>
+
+                            <div class="space-y-12 max-w-5xl">
+                                <!-- Item 1 -->
+                                <div class="flex items-start">
+                                    <div
+                                        class="font-heading font-extrabold text-4xl text-[#22C55E] w-24 flex-shrink-0 pt-1">
+                                        01
+                                    </div>
+                                    <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                                        <h3 class="font-bold text-[#111827] text-2xl mb-2">Voice AI just got good enough
+                                        </h3>
+                                        <p class="text-lg text-gray-500 leading-relaxed font-medium">Synthflow AI raised
+                                            $30M led by Accel to build no-code voice agents. Founded in 2023, already
+                                            handling 45 million calls with 99.9% uptime. AI calls now sound human. The
+                                            quality gap closed in 2024.</p>
+                                    </div>
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="flex items-start">
+                                    <div
+                                        class="font-heading font-extrabold text-4xl text-[#22C55E] w-24 flex-shrink-0 pt-1">
+                                        02
+                                    </div>
+                                    <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                                        <h3 class="font-bold text-[#111827] text-2xl mb-2">The best tool still isn't
+                                            built for SMBs</h3>
+                                        <p class="text-lg text-gray-500 leading-relaxed font-medium">Avoca AI, our
+                                            closest competitor, targets enterprise contractors and doesn't publish
+                                            pricing. Even so, it lacks a unified self-learning brain across channels.
+                                            OmniFi starts at $199/mo. That's $6/day to recover $140K+ in lost revenue
+                                            annually.</p>
+                                    </div>
+                                </div>
+                                <!-- Item 3 -->
+                                <div class="flex items-start">
+                                    <div
+                                        class="font-heading font-extrabold text-4xl text-[#22C55E] w-24 flex-shrink-0 pt-1">
+                                        03
+                                    </div>
+                                    <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                                        <h3 class="font-bold text-[#111827] text-2xl mb-2">AI got cheap enough to give
+                                            to a plumber</h3>
+                                        <p class="text-lg text-gray-500 leading-relaxed font-medium">Enterprise-grade
+                                            voice and messaging AI is now 10× cheaper than it was in early 2024. That's
+                                            what makes a $199/mo all-in-one possible for a 5-person roofing crew.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 7: Market Size</div>
+                        <div class="slide bg-white flex flex-row items-stretch relative overflow-hidden">
+
+                            <!-- LEFT: Text -->
+                            <div class="w-[48%] flex flex-col justify-center pl-20 pr-10">
+                                <h2
+                                    class="font-heading text-6xl font-extrabold text-[#111827] tracking-tight leading-[1.05] mb-5">
+                                    A <span class="text-[#22C55E]">$3 Billion</span> opportunity.
+                                </h2>
+                                <p class="text-xl text-gray-500 font-medium leading-relaxed">
+                                    Home service contractors desperately need modernization, specifically in
+                                    communication automation.
+                                </p>
+                            </div>
+
+                            <!-- RIGHT: Funnel -->
+                            <div class="w-[52%] flex justify-center items-center pr-16">
+                                <div class="relative w-full max-w-md flex flex-col items-center">
+
+                                    <!-- TAM -->
+                                    <div
+                                        class="w-full bg-gray-50 border border-gray-100 rounded-t-2xl p-7 text-center relative z-10 transition-all hover:bg-white hover:shadow-lg">
+                                        <div class="absolute -left-[72px] top-1/2 -translate-y-1/2 text-right">
+                                            <div class="font-bold text-gray-400 text-sm tracking-wider">TAM</div>
+                                        </div>
+                                        <div class="font-heading text-4xl font-extrabold text-[#111827] mb-1">$3.0B
+                                        </div>
+                                        <p class="text-xs text-gray-500 font-medium">2.5M home service businesses ×
+                                            $1,200 avg annual SaaS spend</p>
+                                    </div>
+
+                                    <!-- Trapezoid connector 1 -->
+                                    <div class="w-11/12 h-6 border-l border-r border-gray-100 bg-gray-50 z-20"
+                                        style="clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);"></div>
+
+                                    <!-- SAM -->
+                                    <div
+                                        class="w-10/12 bg-[#DCFCE7]/50 border border-[#22C55E]/20 border-b-0 p-7 text-center relative z-10 transition-all hover:bg-[#DCFCE7]/70 hover:shadow-lg">
+                                        <div class="absolute -left-[60px] top-1/2 -translate-y-1/2 text-right">
+                                            <div class="font-bold text-[#166534]/60 text-sm tracking-wider">SAM</div>
+                                        </div>
+                                        <div class="font-heading text-4xl font-extrabold text-[#166534] mb-1">$432M
+                                        </div>
+                                        <p class="text-xs text-[#166534]/70 font-medium">360K contractors actively using
+                                            digital lead tools × $1,200/yr</p>
+                                    </div>
+
+                                    <!-- Trapezoid connector 2 -->
+                                    <div class="w-9/12 h-6 border-l border-r border-[#22C55E]/20 bg-[#DCFCE7]/50 z-20"
+                                        style="clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);"></div>
+
+                                    <!-- SOM -->
+                                    <div
+                                        class="w-8/12 bg-[#22C55E] rounded-b-2xl p-7 text-center shadow-[0_10px_30px_rgba(34,197,94,0.3)] relative z-30 transform hover:scale-105 transition-transform origin-top">
+                                        <div class="absolute -left-[52px] top-1/2 -translate-y-1/2 text-right">
+                                            <div class="font-bold text-[#22C55E] text-sm tracking-wider">SOM</div>
+                                        </div>
+                                        <div class="font-heading text-5xl font-extrabold text-white mb-2">$4.3M</div>
+                                        <p class="text-xs text-white/90 font-medium">1,800 contractors in Year 1 ×
+                                            $199/mo</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 8: Traction (Pre-Launch)</div>
+                        <div class="slide bg-white flex flex-row items-center p-20 relative overflow-hidden">
+
+                            <div class="w-1/2 pr-12">
+                                <h2
+                                    class="font-heading text-6xl font-extrabold text-[#111827] mb-6 tracking-tight leading-tight">
+                                    <span class="text-[#22C55E]">847+ Contractors</span><br>Waitlisted via Demo.
+                                </h2>
+                                <p class="text-xl text-gray-500 mb-8 leading-relaxed font-medium">
+                                    We don't use videos. We offer a live, real-time AI phone call demo on our landing
+                                    page. The product sells itself in under 30 seconds.
+                                </p>
+                                <div class="bg-gray-50 border border-gray-100 rounded-xl p-5">
+                                    <h4 class="font-bold text-[#111827] text-base mb-2">The GTM Strategy</h4>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start text-gray-600 text-sm">
+                                            <i data-lucide="target"
+                                                class="text-[#22C55E] w-4 h-4 mr-3 mt-0.5 flex-shrink-0"></i>
+                                            1,000 signups target before Q2 2026 Beta.
+                                        </li>
+                                        <li class="flex items-start text-gray-600 text-sm">
+                                            <i data-lucide="mail"
+                                                class="text-[#22C55E] w-4 h-4 mr-3 mt-0.5 flex-shrink-0"></i>
+                                            Cold email at scale: we send 1,000s every single day with near-zero marginal
+                                            cost.
+                                        </li>
+                                        <li class="flex items-start text-gray-600 text-sm">
+                                            <i data-lucide="zap"
+                                                class="text-[#22C55E] w-4 h-4 mr-3 mt-0.5 flex-shrink-0"></i>
+                                            "50% off for life" Founding offer to lock MRR.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="w-1/2 flex justify-center">
+                                <div
+                                    class="w-full max-w-sm bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-100 p-8 overflow-hidden relative">
+                                    <div
+                                        class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#22C55E] to-[#16A34A]">
+                                    </div>
+                                    <div class="text-center mb-6">
+                                        <div
+                                            class="w-16 h-16 bg-[#DCFCE7] text-[#22C55E] rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                                            <i data-lucide="phone-call" class="w-8 h-8"></i>
+                                        </div>
+                                        <h3 class="font-bold text-xl text-[#111827]">Incoming AI Call</h3>
+                                        <p class="text-sm text-gray-500 mt-1">Experience it yourself.</p>
+                                    </div>
+                                    <div class="bg-gray-50 rounded-xl p-4 text-center border border-gray-100 mt-8">
+                                        <div class="text-sm font-bold text-gray-500">Current Waitlist</div>
+                                        <div class="text-4xl font-extrabold text-[#22C55E] tracking-tight mt-1">
+                                            847<span class="text-gray-300 text-2xl font-medium"> / 1,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 9: Established Traction</div>
+                        <div class="slide bg-[#F9FAFB] flex items-center justify-center p-16 relative overflow-hidden">
+                            <!-- Background design -->
+                            <div class="absolute inset-0 bg-white"
+                                style="clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);"></div>
+
+                            <div class="w-full relative z-10">
+                                <div class="text-center mb-16">
+                                    <h2 class="font-heading text-6xl font-extrabold text-[#111827] tracking-tight">
+                                        Powering <span class="text-[#22C55E]">$53M+</span> in<br>Client Enterprises.
+                                    </h2>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-8">
+                                    <div
+                                        class="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 text-center relative overflow-hidden">
+                                        <div class="w-1 absolute left-0 top-0 bottom-0 bg-blue-500"></div>
+                                        <div class="flex items-center justify-center h-16 mb-4">
+                                            <img src="client logos/sold.png" alt="SOLD.com"
+                                                class="max-h-full max-w-[200px] object-contain">
+                                        </div>
+                                        <div class="text-5xl font-black text-[#111827] mb-4">60%</div>
+                                        <div class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">
+                                            Workload Cut</div>
+                                        <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500">
+                                            Vendor management automated
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 text-center relative overflow-hidden">
+                                        <div class="w-1 absolute left-0 top-0 bottom-0 bg-[#22C55E]"></div>
+                                        <div class="flex items-center justify-center h-12 mb-4">
+                                            <img src="client logos/renu.webp" alt="RENU"
+                                                class="max-h-full max-w-[120px] object-contain">
+                                        </div>
+                                        <div class="text-5xl font-black text-[#111827] mb-4">&lt;30s</div>
+                                        <div class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Lead
+                                            Response</div>
+                                        <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500">
+                                            +6 Figures Saved Annually
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 text-center relative overflow-hidden">
+                                        <div class="w-1 absolute left-0 top-0 bottom-0 bg-purple-500"></div>
+                                        <div class="flex items-center justify-center h-16 mb-4">
+                                            <img src="client logos/Keyrenter-Logo-thumbnail.png" alt="Keyrenter"
+                                                class="max-h-full max-w-[200px] object-contain">
+                                        </div>
+                                        <div class="text-5xl font-black text-[#111827] mb-4">278+</div>
+                                        <div class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">
+                                            Weekly Appts</div>
+                                        <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500">
+                                            65K+ Calls Handled
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 text-center relative overflow-hidden">
+                                        <div class="w-1 absolute left-0 top-0 bottom-0 bg-orange-500"></div>
+                                        <div class="flex items-center justify-center h-12 mb-4">
+                                            <img src="client logos/iconpta.png" alt="ICON Property Tax"
+                                                class="max-h-full max-w-[120px] object-contain">
+                                        </div>
+                                        <div class="text-5xl font-black text-[#111827] mb-4">80%+</div>
+                                        <div class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">
+                                            Automated Leads</div>
+                                        <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500">
+                                            Onboarding Streamlined
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-12 flex items-center justify-center gap-12">
+                                    <span class="text-sm font-medium text-gray-500">Other notable clients:</span>
+                                    <img src="public/clients/Solar-alphasolarsa-1.png" alt="Alpha Solar"
+                                        class="h-10 object-contain">
+                                    <img src="public/clients/New+Logo+Alternative+Bold.webp" alt="Arrow Energy"
+                                        class="h-10 object-contain">
+                                    <img src="public/clients/logo.webp" alt="Summers Plumbing"
+                                        class="h-10 object-contain">
+                                    <img src="client logos/LT.png" alt="LT Property Mgmt" class="h-10 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 10: Founder & CEO</div>
+                        <div class="slide flex flex-row">
+                            <div class="w-[40%] bg-gray-100 flex items-center justify-center relative overflow-hidden">
+                                <img src="founder.jpeg" alt="Vishnu Anilkumar - Founder & CEO"
+                                    class="w-full h-full object-cover">
+                                <div
+                                    class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/10 to-transparent">
+                                </div>
+                            </div>
+                            <div
+                                class="w-[60%] p-16 flex flex-col justify-center bg-white z-10 -ml-4 rounded-l-3xl shadow-[-10px_0_30px_rgba(0,0,0,0.05)] border-l border-gray-100">
+                                <div class="badge mb-6 self-start tracking-wider">Founder & CEO</div>
+                                <h2 class="font-heading text-6xl font-extrabold text-gray-900 mb-2">Vishnu Anilkumar
+                                </h2>
+                                <p
+                                    class="text-xl text-primary-600 font-bold mb-10 max-w-lg leading-relaxed uppercase tracking-widest text-sm">
+                                    Architecting Autonomous AI Call Centers
+                                </p>
+
+                                <div class="grid grid-cols-2 gap-x-8 gap-y-10">
+                                    <div>
+                                        <div class="text-4xl font-black text-gray-900 mb-1">65,000+</div>
+                                        <div class="text-sm font-bold text-gray-900 mb-1">Calls Scaled</div>
+                                        <p class="text-xs text-gray-500">Booking 278 appointments/week autonomously for
+                                            a single
+                                            enterprise.</p>
+                                    </div>
+                                    <div>
+                                        <div class="text-4xl font-black text-gray-900 mb-1">$216K+</div>
+                                        <div class="text-sm font-bold text-gray-900 mb-1">Annual Revenue Recovered</div>
+                                        <p class="text-xs text-gray-500">Via smart, relentless AI follow-up workflows.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <div class="text-4xl font-black text-gray-900 mb-1">&lt;30s</div>
+                                        <div class="text-sm font-bold text-gray-900 mb-1">Lead Response Time</div>
+                                        <p class="text-xs text-gray-500">Completely replacing manual SDR teams.</p>
+                                    </div>
+                                    <div>
+                                        <div class="text-4xl font-black text-gray-900 mb-1">200+</div>
+                                        <div class="text-sm font-bold text-gray-900 mb-1">Enterprises Automated</div>
+                                        <p class="text-xs text-gray-500">Delivering 6-figure savings per deployment
+                                            across 5+ verticals.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 11: The Ask / Fundraising</div>
+                        <div class="slide pattern-bg">
+                            <div class="slide-inner items-center justify-center text-center">
+                                <h2
+                                    class="font-heading text-6xl font-extrabold text-gray-900 mb-8 max-w-4xl tracking-tight leading-tight">
+                                    Raising <span class="text-primary-600">$3M</span> to reach $100K MRR in 8 months.
+                                </h2>
+
+                                <div
+                                    class="w-full max-w-3xl bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 p-10 mx-auto text-left">
+                                    <div class="flex items-center justify-between border-b border-gray-100 pb-8 mb-8">
+                                        <div>
+                                            <div class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">
+                                                Target Milestone
+                                            </div>
+                                            <div class="text-3xl font-bold text-gray-900">500 Paying Customers</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">
+                                                Target Metric
+                                            </div>
+                                            <div class="text-3xl font-bold text-gray-900">&lt;5% Churn</div>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="text-xl font-bold text-gray-900 mb-6">Use of Funds</h3>
+
+                                    <div class="space-y-6">
+                                        <div>
+                                            <div class="flex justify-between text-sm font-bold mb-2">
+                                                <span class="text-gray-900">Engineering & Product</span>
+                                                <span class="text-primary-600">50%</span>
+                                            </div>
+                                            <div class="w-full bg-gray-100 rounded-full h-3">
+                                                <div class="bg-primary-600 h-3 rounded-full" style="width: 50%"></div>
+                                            </div>
+                                            <p class="text-sm text-gray-500 mt-2">Deep integrations (ServiceTitan,
+                                                Housecall Pro), AI model fine-tuning, and platform scaling.</p>
+                                        </div>
+
+                                        <div>
+                                            <div class="flex justify-between text-sm font-bold mb-2">
+                                                <span class="text-gray-900">Go-to-Market & Sales</span>
+                                                <span class="text-primary-600">30%</span>
+                                            </div>
+                                            <div class="w-full bg-gray-100 rounded-full h-3">
+                                                <div class="bg-gray-800 h-3 rounded-full" style="width: 30%"></div>
+                                            </div>
+                                            <p class="text-sm text-gray-500 mt-2">Cold email infrastructure, paid
+                                                Meta/Google ads
+                                                at $100-$200 CAC, and outbound SDR pipeline.</p>
+                                        </div>
+
+                                        <div>
+                                            <div class="flex justify-between text-sm font-bold mb-2">
+                                                <span class="text-gray-900">Operations & Hiring</span>
+                                                <span class="text-primary-600">20%</span>
+                                            </div>
+                                            <div class="w-full bg-gray-100 rounded-full h-3">
+                                                <div class="bg-gray-500 h-3 rounded-full" style="width: 20%"></div>
+                                            </div>
+                                            <p class="text-sm text-gray-500 mt-2">Key hires in engineering and customer
+                                                success
+                                                to support rapid scaling.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="slide-container">
+                        <div class="title-label">Slide 12: Ending</div>
+                        <div class="slide bg-white flex flex-col items-center justify-center relative text-center">
+
+                            <!-- Confetti Top Left -->
+                            <div class="absolute top-20 left-24">
+                                <div class="confetti w-[45px] h-[12px] bg-primary-500 transform -rotate-6 mb-3 -ml-4">
+                                </div>
+                                <div class="confetti w-[35px] h-[10px] bg-gray-900 transform rotate-3 mb-3 ml-2"></div>
+                                <div
+                                    class="confetti w-[40px] h-[12px] bg-primary-300 transform rotate-6 absolute -top-4 left-12">
+                                </div>
+                            </div>
+
+                            <!-- Confetti Bottom Right -->
+                            <div class="absolute bottom-28 right-32">
+                                <div class="confetti w-[50px] h-[10px] bg-gray-900 transform -rotate-3 mb-3 -ml-8">
+                                </div>
+                                <div class="confetti w-[45px] h-[12px] bg-primary-600 transform rotate-6 mb-3 ml-6">
+                                </div>
+                                <div
+                                    class="confetti w-[30px] h-[10px] bg-primary-200 transform -rotate-12 absolute top-8 left-2">
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 mb-10">
+                                <div
+                                    class="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                                    <i data-lucide="zap" class="w-8 h-8"></i>
+                                </div>
+                            </div>
+                            <h1
+                                class="font-heading text-[6.5rem] font-extrabold text-gray-900 mb-6 leading-none tracking-tight">
+                                omnify.
+                            </h1>
+
+                            <h2 class="text-2xl text-gray-500 font-sans font-medium max-w-2xl leading-relaxed mb-12">
+                                The AI that answers your leads, remembers the conversation, and books the job
+                                autonomously.<br>
+                                <span class="font-bold text-gray-900 mt-2 block tracking-tight">So you don't have
+                                    to.</span>
+                            </h2>
+
+                            <a href="#"
+                                class="inline-block bg-primary-600 text-white font-bold uppercase tracking-widest text-sm px-16 py-5 rounded hover:bg-primary-700 transition duration-300 shadow-md">
+                                omnifycrm.com
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div> <!-- End deck-container -->
+
+
+            <!-- Navigation Controls -->
+            <div class="fixed bottom-8 right-8 z-50 flex space-x-2">
+                <button onclick="prevSlide()"
+                    class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border border-gray-200 text-gray-600 hover:text-[#22c55e] hover:border-[#bbf7d0] transition-colors">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <button onclick="nextSlide()"
+                    class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border border-gray-200 text-gray-600 hover:text-[#22c55e] hover:border-[#bbf7d0] transition-colors">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <!-- Progress indicator -->
+            <div
+                class="fixed bottom-10 left-10 z-[100] text-gray-400 font-medium text-sm tracking-widest uppercase bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-gray-100">
+                <span id="current">1</span> / <span id="total">12</span>
+            </div>
+
+            <script>
+
+                function resizeDeck() {
+                    const wrapper = document.getElementById('slide-wrapper');
+                    // Add a small 95% buffer so it doesn't touch the exact edges of the screen
+                    const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.95;
+                    wrapper.style.transform = `scale(${scale})`;
+                }
+                window.addEventListener('resize', resizeDeck);
+                resizeDeck();
+
+                // Slide logic
+                const slides = document.querySelectorAll('.slide');
+                let currentSlide = 0;
+
+                document.getElementById('total').innerText = slides.length;
+
+                function updateSlides() {
+                    slides.forEach((slide, index) => {
+                        if (index === currentSlide) {
+                            slide.classList.add('active');
+                        } else {
+                            slide.classList.remove('active');
+                        }
+                    });
+                    document.getElementById('current').innerText = currentSlide + 1;
+                }
+
+                function nextSlide() {
+                    if (currentSlide < slides.length - 1) {
+                        currentSlide++;
+                        updateSlides();
+                    }
+                }
+
+                function prevSlide() {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateSlides();
+                    }
+                }
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'Space') {
+                        nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    }
+                });
+            </script>
+
+            <script>
+                lucide.createIcons();
+            </script>
+</body>
+
+</html>
