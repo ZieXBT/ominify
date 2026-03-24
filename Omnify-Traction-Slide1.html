@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnify - Traction Slide 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        omnify: {
+                            accent: '#22C55E',
+                            light: '#F8FAFc',
+                            dark: '#0F172A',
+                            text: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-inner {
+            padding: 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: #dcfce7;
+            color: #16a34a;
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 antialiased py-10">
+
+    <div class="slide-container mx-auto">
+        <!-- Slide 6: Traction as Slide 1 -->
+        <div class="slide">
+            <div class="slide-inner">
+                <div class="w-full h-full flex items-center">
+                    <div class="w-1/2 pr-12">
+                        <div class="badge mb-6">Traction (Pre-Launch)</div>
+                        <h2
+                            class="font-heading text-6xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
+                            <span class="text-primary-600">847+ Contractors</span><br>Waitlisted via Demo.
+                        </h2>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            We don't use videos. We offer a live, real-time AI phone call demo on our landing page. The
+                            product sells itself in under 30 seconds.
+                        </p>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                            <h4 class="font-bold text-gray-900 text-lg mb-2">The GTM Strategy</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start text-gray-600 text-base"><i data-lucide="target"
+                                        class="text-primary-600 w-5 h-5 mr-3 mt-0.5 flex-shrink-0"></i> 1,000 signups
+                                    target before Q1 2026 Beta.</li>
+                                <li class="flex items-start text-gray-600 text-base"><i data-lucide="zap"
+                                        class="text-primary-600 w-5 h-5 mr-3 mt-0.5 flex-shrink-0"></i> "50% off for
+                                    life" Founding offer to lock MRR.</li>
+                                <li class="flex items-start text-gray-600 text-base"><i data-lucide="users"
+                                        class="text-primary-600 w-5 h-5 mr-3 mt-0.5 flex-shrink-0"></i> Paid acquisition
+                                    CAC targeting $100-$200.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="w-1/2 flex justify-center">
+                        <div
+                            class="w-full max-w-sm bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-100 p-8 overflow-hidden relative">
+                            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary-400 to-primary-600">
+                            </div>
+                            <div class="text-center mb-6">
+                                <div
+                                    class="w-16 h-16 bg-primary-50 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                                    <i data-lucide="phone-call" class="w-8 h-8"></i>
+                                </div>
+                                <h3 class="font-bold text-xl">Incoming AI Call</h3>
+                                <p class="text-sm text-gray-500 mt-1">Experience it yourself.</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4 text-center border border-gray-100 mt-8">
+                                <div class="text-sm font-bold text-gray-800">Current Waitlist</div>
+                                <div class="text-4xl font-extrabold text-primary-600 tracking-tight mt-1">847<span
+                                        class="text-gray-400 text-2xl font-medium"> / 1000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnify "Why Now" Slide Explorations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        omnify: {
+                            accent: '#22C55E', // The requested green
+                            light: '#dcfce7',
+                            dark: '#16a34a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            padding: 40px;
+        }
+
+        .slide-container {
+            margin-bottom: 60px;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .title-label {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4b5563;
+            margin-bottom: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 antialiased">
+
+    <div class="text-center mb-12">
+        <h1 class="text-3xl font-bold">Omnify "Why Now" Slide Explorations</h1>
+        <p class="text-gray-500 mt-2">10 minimal variations applying the plain white theme inspired by the screenshot.
+        </p>
+    </div>
+
+
+    <!-- OPTION 1: Clean Left-Aligned List (Closest to Screenshot) -->
+    <div class="slide-container">
+        <div class="title-label">Option 1: Clean Indexed List (Refined Screenshot)</div>
+        <div class="slide bg-white flex flex-col p-24 justify-center">
+
+            <div class="mb-16">
+                <div
+                    class="inline-flex px-4 py-1.5 rounded-full bg-omnify-light text-omnify-dark text-xs font-bold tracking-widest uppercase mb-6">
+                    WHY NOW</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    The timing is <span class="text-omnify-accent">perfect.</span>
+                </h2>
+            </div>
+
+            <div class="space-y-12 max-w-5xl">
+                <!-- Item 1 -->
+                <div class="flex items-start">
+                    <div class="font-heading font-extrabold text-4xl text-omnify-accent w-24 flex-shrink-0 pt-1">01
+                    </div>
+                    <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                        <h3 class="font-bold text-gray-900 text-2xl mb-2">Voice AI just got good enough</h3>
+                        <p class="text-lg text-gray-500 leading-relaxed font-medium">GPT-4o, Whisper, and real-time
+                            voice models have crossed the quality threshold — AI calls are now indistinguishable from
+                            human calls.</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex items-start">
+                    <div class="font-heading font-extrabold text-4xl text-omnify-accent w-24 flex-shrink-0 pt-1">02
+                    </div>
+                    <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                        <h3 class="font-bold text-gray-900 text-2xl mb-2">SMBs are priced out of existing tools</h3>
+                        <p class="text-lg text-gray-500 leading-relaxed font-medium">Competitors charge $400-$1,500/mo.
+                            There's no solution at the $99 price point that actually works across multiple channels.</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="flex items-start">
+                    <div class="font-heading font-extrabold text-4xl text-omnify-accent w-24 flex-shrink-0 pt-1">03
+                    </div>
+                    <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                        <h3 class="font-bold text-gray-900 text-2xl mb-2">Channel fragmentation is accelerating</h3>
+                        <p class="text-lg text-gray-500 leading-relaxed font-medium">Customers now reach businesses via
+                            6+ channels. A phone-only answering service is no longer sufficient.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 2: Horizontal 3-Column Grid -->
+    <div class="slide-container">
+        <div class="title-label">Option 2: Horizontal 3-Column Grid</div>
+        <div class="slide bg-white flex flex-col p-24 justify-center">
+
+            <div class="mb-20 text-center">
+                <div class="text-omnify-accent text-sm font-bold tracking-widest uppercase mb-4">WHY NOW</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    The timing is perfect.
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-3 gap-12">
+                <!-- Col 1 -->
+                <div class="flex flex-col">
+                    <div class="font-heading font-extrabold text-6xl text-gray-100 mb-6 relative">
+                        01
+                        <div class="absolute bottom-2 left-0 w-8 h-1 bg-omnify-accent"></div>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 pr-4">Voice AI just got good enough</h3>
+                    <p class="text-gray-500 font-medium">GPT-4o, Whisper, and real-time voice models have crossed the
+                        quality threshold — AI calls are now indistinguishable from human calls.</p>
+                </div>
+                <!-- Col 2 -->
+                <div class="flex flex-col">
+                    <div class="font-heading font-extrabold text-6xl text-gray-100 mb-6 relative">
+                        02
+                        <div class="absolute bottom-2 left-0 w-8 h-1 bg-omnify-accent"></div>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 pr-4">SMBs are priced out</h3>
+                    <p class="text-gray-500 font-medium">Competitors charge $400-$1,500/mo. There's no solution at the
+                        $99 price point that actually works across multiple channels.</p>
+                </div>
+                <!-- Col 3 -->
+                <div class="flex flex-col">
+                    <div class="font-heading font-extrabold text-6xl text-gray-100 mb-6 relative">
+                        03
+                        <div class="absolute bottom-2 left-0 w-8 h-1 bg-omnify-accent"></div>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 pr-4">Channel fragmentation</h3>
+                    <p class="text-gray-500 font-medium">Customers now reach businesses via 6+ channels. A phone-only
+                        answering service is no longer sufficient.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 3: Icon-Led Stacked Cards -->
+    <div class="slide-container">
+        <div class="title-label">Option 3: Icon-Led Stacked Cards</div>
+        <div class="slide bg-white flex items-center p-20">
+
+            <div class="w-2/5 pr-16 border-r border-gray-100">
+                <div
+                    class="inline-flex px-3 py-1 bg-omnify-light text-omnify-dark text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
+                    THE CATALYST</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-6">
+                    The timing is perfect.
+                </h2>
+                <p class="text-xl text-gray-500 font-medium">
+                    Three massive market shifts have created the ideal opening for Omnify.
+                </p>
+            </div>
+
+            <div class="w-3/5 pl-16 space-y-8">
+                <div
+                    class="bg-gray-50 rounded-2xl p-6 flex items-start border border-gray-100 transition-colors hover:border-omnify-accent hover:bg-white">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-omnify-accent mr-6 flex-shrink-0">
+                        <i data-lucide="mic" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-xl mb-1">Voice AI just got good enough</h3>
+                        <p class="text-gray-500 text-sm font-medium">GPT-4o and real-time models mean AI calls are now
+                            indistinguishable from human calls.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gray-50 rounded-2xl p-6 flex items-start border border-gray-100 transition-colors hover:border-omnify-accent hover:bg-white">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-omnify-accent mr-6 flex-shrink-0">
+                        <i data-lucide="trending-up" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-xl mb-1">SMBs are priced out of existing tools</h3>
+                        <p class="text-gray-500 text-sm font-medium">With competitors charging $400-$1,500/mo, the $99
+                            multi-channel space is completely empty.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gray-50 rounded-2xl p-6 flex items-start border border-gray-100 transition-colors hover:border-omnify-accent hover:bg-white">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-omnify-accent mr-6 flex-shrink-0">
+                        <i data-lucide="network" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-xl mb-1">Channel fragmentation is accelerating</h3>
+                        <p class="text-gray-500 text-sm font-medium">Customers reach businesses via 6+ channels.
+                            Phone-only answering is no longer sufficient.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OPTION 4: Dark Accent High Contrast -->
+    <div class="slide-container">
+        <div class="title-label">Option 4: Left Block Anchor (Very Minimal)</div>
+        <div class="slide bg-white flex p-0">
+
+            <div class="w-1/3 bg-gray-50 p-20 flex flex-col justify-center border-r border-gray-100">
+                <div class="text-omnify-accent text-sm font-bold tracking-widest uppercase mb-4">WHY NOW</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    The timing is perfect.
+                </h2>
+            </div>
+
+            <div class="w-2/3 p-20 flex flex-col justify-center space-y-16">
+                <!-- 1 -->
+                <div class="flex">
+                    <div class="text-gray-300 font-heading text-4xl font-bold w-16 pt-1">01</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-3xl mb-3">Voice AI just got good enough</h3>
+                        <p class="text-xl text-gray-500 font-medium max-w-2xl">GPT-4o, Whisper, and real-time voice
+                            models have crossed the quality threshold — AI calls are now indistinguishable from human
+                            calls.</p>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="flex">
+                    <div class="text-gray-300 font-heading text-4xl font-bold w-16 pt-1">02</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-3xl mb-3">SMBs are priced out</h3>
+                        <p class="text-xl text-gray-500 font-medium max-w-2xl">Competitors charge $400-$1,500/mo.
+                            There's no solution at the $99 price point that actually works across multiple channels.</p>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="flex">
+                    <div class="text-gray-300 font-heading text-4xl font-bold w-16 pt-1">03</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-3xl mb-3">Channel fragmentation</h3>
+                        <p class="text-xl text-gray-500 font-medium max-w-2xl">Customers now reach businesses via 6+
+                            channels. A phone-only answering service is no longer sufficient.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 5: Big Typographic Focus -->
+    <div class="slide-container">
+        <div class="title-label">Option 5: Big Typography Focus</div>
+        <div class="slide bg-white flex flex-col items-center justify-center p-20">
+
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl font-extrabold text-gray-400 tracking-widest uppercase mb-2">WHY NOW
+                </h2>
+                <div class="w-16 h-1 bg-omnify-accent mx-auto"></div>
+            </div>
+
+            <div class="w-full max-w-5xl">
+                <!-- Row 1 -->
+                <div
+                    class="border-t border-b border-gray-200 py-8 flex items-center group hover:bg-gray-50 transition-colors">
+                    <div
+                        class="font-heading text-3xl font-bold text-omnify-accent w-24 pl-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                        01</div>
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-gray-900 text-3xl">Voice AI just got good enough</h3>
+                    </div>
+                    <div class="w-1/2 pr-6">
+                        <p class="text-gray-500 font-medium">GPT-4o models have crossed the quality threshold — AI calls
+                            are now indistinguishable from human calls.</p>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="border-b border-gray-200 py-8 flex items-center group hover:bg-gray-50 transition-colors">
+                    <div
+                        class="font-heading text-3xl font-bold text-omnify-accent w-24 pl-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                        02</div>
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-gray-900 text-3xl">SMBs are priced out</h3>
+                    </div>
+                    <div class="w-1/2 pr-6">
+                        <p class="text-gray-500 font-medium">Competitors charge $400-$1,500/mo. There's no solution at
+                            $99 that works across multiple channels.</p>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="border-b border-gray-200 py-8 flex items-center group hover:bg-gray-50 transition-colors">
+                    <div
+                        class="font-heading text-3xl font-bold text-omnify-accent w-24 pl-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                        03</div>
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-gray-900 text-3xl">Accelerating fragmentation</h3>
+                    </div>
+                    <div class="w-1/2 pr-6">
+                        <p class="text-gray-500 font-medium">Customers reach businesses via 6+ channels. A phone-only
+                            answering service is no longer sufficient.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OPTION 6: Framed Vertical Columns -->
+    <div class="slide-container">
+        <div class="title-label">Option 6: Framed Vertical Columns</div>
+        <div class="slide bg-white flex flex-col p-20 justify-center">
+
+            <div class="flex justify-between items-end mb-16">
+                <h2 class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    The timing is perfect.
+                </h2>
+                <div class="text-omnify-accent text-sm font-bold font-mono tracking-widest bg-omnify-light px-3 py-1">
+                    WHY NOW
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-8">
+                <div class="border border-gray-200 rounded-2xl p-10 flex flex-col">
+                    <div
+                        class="w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center font-heading font-bold text-xl mb-8">
+                        1</div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 leading-snug">Voice AI just got<br>good enough</h3>
+                    <p class="text-gray-500 font-medium">GPT-4o, Whisper, and real-time voice models have crossed the
+                        quality threshold. AI calls are now indistinguishable from human calls.</p>
+                </div>
+
+                <div class="border border-gray-200 rounded-2xl p-10 flex flex-col">
+                    <div
+                        class="w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center font-heading font-bold text-xl mb-8">
+                        2</div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 leading-snug">SMBs are priced out<br>of existing
+                        tools</h3>
+                    <p class="text-gray-500 font-medium">Competitors charge $400-$1,500/mo. There's no solution at the
+                        $99 price point that actually works across multiple channels.</p>
+                </div>
+
+                <div class="border border-gray-200 rounded-2xl p-10 flex flex-col">
+                    <div
+                        class="w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center font-heading font-bold text-xl mb-8">
+                        3</div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 leading-snug">Channel fragmentation<br>is
+                        accelerating</h3>
+                    <p class="text-gray-500 font-medium">Customers now reach businesses via 6+ channels. A phone-only
+                        answering service is no longer sufficient.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 7: Stepped Diagonal -->
+    <div class="slide-container">
+        <div class="title-label">Option 7: Stepped Diagonal Concept</div>
+        <div class="slide bg-white p-20 flex flex-col relative">
+
+            <div class="absolute top-20 right-20 text-right">
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 opacity-10">WHY NOW</h2>
+            </div>
+
+            <h2 class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-16">
+                The timing is perfect.
+            </h2>
+
+            <div class="space-y-8 absolute right-20 top-40 w-2/3">
+                <div
+                    class="bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.05)] rounded-2xl p-8 transform -translate-x-24">
+                    <div class="flex items-center mb-2">
+                        <div class="text-omnify-accent font-bold mr-4">01.</div>
+                        <h3 class="font-bold text-gray-900 text-xl">Voice AI just got good enough</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm ml-9">GPT-4o and real-time models mean AI is now indistinguishable
+                        from humans.</p>
+                </div>
+
+                <div
+                    class="bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.05)] rounded-2xl p-8 transform -translate-x-12 z-10 relative border-l-4 border-omnify-accent">
+                    <div class="flex items-center mb-2">
+                        <div class="text-omnify-accent font-bold mr-4">02.</div>
+                        <h3 class="font-bold text-gray-900 text-xl">SMBs are priced out</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm ml-9">Competitors charge $400-$1,500/mo. The $99 multi-channel space
+                        is empty.</p>
+                </div>
+
+                <div
+                    class="bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.05)] rounded-2xl p-8 transform translate-x-0 z-20 relative">
+                    <div class="flex items-center mb-2">
+                        <div class="text-omnify-accent font-bold mr-4">03.</div>
+                        <h3 class="font-bold text-gray-900 text-xl">Channel fragmentation</h3>
+                    </div>
+                    <p class="text-gray-500 text-sm ml-9">Customers reach businesses via 6+ channels. Phone-only isn't
+                        sufficient.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OPTION 8: Centered Statement Style -->
+    <div class="slide-container">
+        <div class="title-label">Option 8: Centered Statement</div>
+        <div class="slide bg-white flex flex-col items-center justify-center p-20 text-center">
+
+            <div
+                class="inline-flex px-4 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold tracking-widest uppercase mb-6">
+                WHY NOW</div>
+            <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-20">
+                The timing is perfect.
+            </h2>
+
+            <div class="grid grid-cols-3 gap-x-12 max-w-5xl w-full">
+                <div class="relative pt-4">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-omnify-accent"></div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 mt-6">Voice AI crossed<br>the threshold</h3>
+                    <p class="text-gray-500 font-medium">GPT-4o and real-time models make calls indistinguishable from
+                        humans.</p>
+                </div>
+                <div class="relative pt-4">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-omnify-accent"></div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 mt-6">SMBs are priced out<br>of the market</h3>
+                    <p class="text-gray-500 font-medium">Competitors charge $400-$1,500/mo. The $99 price point is
+                        empty.</p>
+                </div>
+                <div class="relative pt-4">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-omnify-accent"></div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-4 mt-6">Fragmentation<br>is accelerating</h3>
+                    <p class="text-gray-500 font-medium">Customers use 6+ channels. Phone-only answering isn't
+                        sufficient.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 9: The "Equation" / Bullet Style -->
+    <div class="slide-container">
+        <div class="title-label">Option 9: Bold Plus (+) Style</div>
+        <div class="slide bg-white flex flex-col p-24 justify-center">
+
+            <div class="mb-16">
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    The timing is perfect.
+                </h2>
+            </div>
+
+            <div class="space-y-8 max-w-4xl">
+                <div class="flex items-center">
+                    <div
+                        class="w-12 h-12 rounded-full bg-omnify-light text-omnify-accent flex items-center justify-center font-bold text-2xl flex-shrink-0 mr-8">
+                        +</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-2xl">Voice AI crossed the "uncanny valley"</h3>
+                        <p class="text-gray-500 font-medium mt-1">Real-time models are now indistinguishable from
+                            humans.</p>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div
+                        class="w-12 h-12 rounded-full bg-omnify-light text-omnify-accent flex items-center justify-center font-bold text-2xl flex-shrink-0 mr-8">
+                        +</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-2xl">SMBs can't afford enterprise tools</h3>
+                        <p class="text-gray-500 font-medium mt-1">With competitors at $400-$1,500/mo, the $99 SMB market
+                            is vacant.</p>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div
+                        class="w-12 h-12 rounded-full bg-omnify-light text-omnify-accent flex items-center justify-center font-bold text-2xl flex-shrink-0 mr-8">
+                        +</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-2xl">Phone-only is no longer enough</h3>
+                        <p class="text-gray-500 font-medium mt-1">Customers expect instant response across 6+ different
+                            channels.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OPTION 10: High Contrast Split -->
+    <div class="slide-container">
+        <div class="title-label">Option 10: High Contrast Visual Anchor</div>
+        <div class="slide bg-white flex p-0">
+
+            <div class="w-1/3 bg-omnify-accent p-16 flex flex-col justify-between text-white relative overflow-hidden">
+                <div
+                    class="absolute -bottom-20 -right-20 text-[200px] text-white/20 font-heading font-extrabold leading-none">
+                    <i data-lucide="clock-3" class="w-64 h-64"></i></div>
+                <div>
+                    <div
+                        class="inline-flex px-3 py-1 bg-white/20 text-white font-bold tracking-widest text-xs uppercase mb-6 rounded-full font-mono">
+                        WHY NOW</div>
+                    <h2 class="font-heading text-5xl font-bold tracking-tight leading-[1.1] mb-6">
+                        The timing<br>is perfect.
+                    </h2>
+                </div>
+                <p class="font-medium text-white/90 text-lg relative z-10">Three market shifts have created the perfect
+                    opening.</p>
+            </div>
+
+            <div class="w-2/3 p-20 flex flex-col justify-center space-y-12">
+                <div>
+                    <div class="text-sm font-bold text-omnify-accent tracking-widest uppercase mb-2">Shift 01</div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-2">Voice AI just got good enough</h3>
+                    <p class="text-gray-600 font-medium">GPT-4o and real-time voice models have crossed the quality
+                        threshold — AI calls are indistinguishable from human calls.</p>
+                </div>
+                <div class="w-24 h-px bg-gray-200"></div>
+                <div>
+                    <div class="text-sm font-bold text-omnify-accent tracking-widest uppercase mb-2">Shift 02</div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-2">SMBs are priced out</h3>
+                    <p class="text-gray-600 font-medium">Competitors charge $400-$1,500/mo. There's no solution at the
+                        $99 price point that actually works across channels.</p>
+                </div>
+                <div class="w-24 h-px bg-gray-200"></div>
+                <div>
+                    <div class="text-sm font-bold text-omnify-accent tracking-widest uppercase mb-2">Shift 03</div>
+                    <h3 class="font-bold text-gray-900 text-2xl mb-2">Channel fragmentation</h3>
+                    <p class="text-gray-600 font-medium">Customers now reach businesses via 6+ channels. A phone-only
+                        answering service is no longer sufficient.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

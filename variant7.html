@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant 7 — Engagement Heatmap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    width: 580px;
+    padding: 52px 44px 44px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  }
+
+  .headline {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .headline .green { color: #2ecc71; }
+
+  .subtext {
+    font-size: 14px;
+    color: #8a8a9a;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  /* Heatmap */
+  .heatmap-container {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+  }
+
+  /* Row labels */
+  .row-labels {
+    display: flex;
+    flex-direction: column;
+    padding-top: 32px;
+    gap: 4px;
+  }
+
+  .row-label {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6a6a7a;
+  }
+
+  .row-label svg { width: 16px; height: 16px; margin-right: 6px; flex-shrink: 0; }
+
+  /* Grid */
+  .heatmap-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Column headers */
+  .col-headers {
+    display: flex;
+    gap: 4px;
+  }
+
+  .col-header {
+    width: 64px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #aaa;
+  }
+
+  .heatmap-row {
+    display: flex;
+    gap: 4px;
+  }
+
+  .cell {
+    width: 64px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    position: relative;
+  }
+
+  .cell:hover {
+    transform: scale(1.08);
+    z-index: 2;
+  }
+
+  /* Heat levels */
+  .cell.h0 { background: #f7f8fa; color: #ccc; }
+  .cell.h1 { background: #e8f8ee; color: #7dcea0; }
+  .cell.h2 { background: #c3e8d0; color: #27ae60; }
+  .cell.h3 { background: #7dcea0; color: #fff; }
+  .cell.h4 {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(46, 204, 113, 0.25);
+  }
+
+  /* Winner indicator */
+  .cell.winner::after {
+    content: '★';
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    font-size: 10px;
+    color: #f39c12;
+  }
+
+  /* Bottom insight */
+  .insight-bar {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    border-radius: 12px;
+  }
+
+  .insight-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .insight-icon svg { width: 16px; height: 16px; fill: white; }
+
+  .insight-text {
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+    align-items: center;
+  }
+
+  .legend-label {
+    font-size: 9px;
+    color: #aaa;
+    font-weight: 600;
+  }
+
+  .legend-block {
+    width: 24px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  .legend-block.l0 { background: #f7f8fa; }
+  .legend-block.l1 { background: #e8f8ee; }
+  .legend-block.l2 { background: #c3e8d0; }
+  .legend-block.l3 { background: #7dcea0; }
+  .legend-block.l4 { background: #2ecc71; }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .heatmap-row { animation: fade-up 0.4s ease both; }
+  .heatmap-row:nth-child(2) { animation-delay: 0.1s; }
+  .heatmap-row:nth-child(3) { animation-delay: 0.2s; }
+  .heatmap-row:nth-child(4) { animation-delay: 0.3s; }
+  .heatmap-row:nth-child(5) { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="headline">It gets <span class="green">smarter</span> over time.</div>
+  <div class="subtext">Self-learning AI that adapts to each lead's preferences.</div>
+
+  <div class="heatmap-container">
+    <div class="row-labels">
+      <div class="row-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        SMS
+      </div>
+      <div class="row-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </div>
+      <div class="row-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3"/></svg>
+        Phone
+      </div>
+      <div class="row-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        Social
+      </div>
+    </div>
+
+    <div class="heatmap-grid">
+      <div class="col-headers">
+        <div class="col-header">Morning</div>
+        <div class="col-header">Midday</div>
+        <div class="col-header">Afternoon</div>
+        <div class="col-header">Evening</div>
+        <div class="col-header">Night</div>
+      </div>
+
+      <!-- SMS row -->
+      <div class="heatmap-row">
+        <div class="cell h1">12%</div>
+        <div class="cell h2">28%</div>
+        <div class="cell h3">45%</div>
+        <div class="cell h4 winner">72%</div>
+        <div class="cell h2">31%</div>
+      </div>
+
+      <!-- Email row -->
+      <div class="heatmap-row">
+        <div class="cell h2">22%</div>
+        <div class="cell h1">14%</div>
+        <div class="cell h0">5%</div>
+        <div class="cell h0">3%</div>
+        <div class="cell h0">1%</div>
+      </div>
+
+      <!-- Phone row -->
+      <div class="heatmap-row">
+        <div class="cell h1">10%</div>
+        <div class="cell h2">25%</div>
+        <div class="cell h1">18%</div>
+        <div class="cell h1">15%</div>
+        <div class="cell h0">2%</div>
+      </div>
+
+      <!-- Social row -->
+      <div class="heatmap-row">
+        <div class="cell h0">4%</div>
+        <div class="cell h0">6%</div>
+        <div class="cell h1">11%</div>
+        <div class="cell h2">20%</div>
+        <div class="cell h3">38%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-label">Low</span>
+    <div class="legend-block l0"></div>
+    <div class="legend-block l1"></div>
+    <div class="legend-block l2"></div>
+    <div class="legend-block l3"></div>
+    <div class="legend-block l4"></div>
+    <span class="legend-label">High</span>
+  </div>
+
+  <div class="insight-bar">
+    <div class="insight-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    </div>
+    <div class="insight-text">AI finds the hot zone: SMS + Evening = 72% reply rate. Shifts all outreach there.</div>
+  </div>
+</div>
+
+</body>
+</html>

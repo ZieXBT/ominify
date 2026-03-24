@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnify Market Size Explorations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        omnify: {
+                            accent: '#22C55E', // The requested green
+                            light: '#dcfce7',
+                            dark: '#16a34a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            padding: 40px;
+        }
+
+        .slide-container {
+            margin-bottom: 60px;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .title-label {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4b5563;
+            margin-bottom: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Diagonal stripes pattern */
+        .pattern-diagonal {
+            background-image: repeating-linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6), repeating-linear-gradient(45deg, #f3f4f6 25%, white 25%, white 75%, #f3f4f6 75%, #f3f4f6);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 antialiased">
+
+    <div class="text-center mb-12">
+        <h1 class="text-3xl font-bold">Omnify Market Size Slide Explorations</h1>
+        <p class="text-gray-500 mt-2">10 unique ways to visualize TAM/SAM/SOM without using concentric circles.</p>
+    </div>
+
+
+    <!-- OPTION 1: The Funnel / Triangle -->
+    <div class="slide-container">
+        <div class="title-label">Option 1: The Filtering Funnel</div>
+        <div class="slide bg-white flex p-20 items-center justify-between">
+
+            <div class="w-1/2 pr-12">
+                <div
+                    class="inline-flex px-3 py-1 bg-omnify-light text-omnify-dark text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
+                    MARKET SIZE</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-6">
+                    A <span class="text-omnify-accent">$4.3B</span> opportunity.
+                </h2>
+                <p class="text-xl text-gray-500 font-medium">Home service contractors desperately need modernization,
+                    specifically in communication automation.</p>
+            </div>
+
+            <div class="w-1/2 relative flex justify-center items-center h-full pt-12">
+                <!-- Funnel Shapes -->
+                <div class="relative w-full max-w-md flex flex-col items-center">
+
+                    <!-- TAM -->
+                    <div
+                        class="w-full bg-gray-50 border border-gray-100 rounded-t-2xl p-6 text-center border-b-0 relative z-10 transition-all hover:bg-white hover:shadow-lg">
+                        <div class="absolute -left-24 top-1/2 -translate-y-1/2 text-right w-20">
+                            <div class="font-bold text-gray-400">TAM</div>
+                        </div>
+                        <div class="font-heading text-4xl font-extrabold text-gray-900 mb-1">$4.3B</div>
+                        <p class="text-xs text-gray-500">7.2M home service businesses × $600 avg SaaS spend</p>
+                    </div>
+
+                    <!-- Trapezoid connector 1 -->
+                    <div class="w-11/12 h-6 border-l border-r border-gray-100 bg-gray-50 z-20"
+                        style="clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);"></div>
+
+                    <!-- SAM -->
+                    <div
+                        class="w-10/12 bg-omnify-light/30 border border-omnify-accent/20 border-b-0 p-6 text-center relative z-10 transition-all hover:bg-omnify-light/50 hover:shadow-lg">
+                        <div class="absolute -left-20 top-1/2 -translate-y-1/2 text-right w-16">
+                            <div class="font-bold text-omnify-dark/60">SAM</div>
+                        </div>
+                        <div class="font-heading text-4xl font-extrabold text-omnify-dark mb-1">$428M</div>
+                        <p class="text-xs text-omnify-dark/70">360K contractors actively using digital lead tools</p>
+                    </div>
+
+                    <!-- Trapezoid connector 2 -->
+                    <div class="w-9/12 h-6 border-l border-r border-omnify-accent/20 bg-omnify-light/30 z-20"
+                        style="clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);"></div>
+
+                    <!-- SOM -->
+                    <div
+                        class="w-8/12 bg-omnify-accent rounded-b-2xl p-6 text-center shadow-[0_10px_30px_rgba(34,197,94,0.3)] relative z-30 transform hover:scale-105 transition-transform origin-top">
+                        <div class="absolute -left-20 top-1/2 -translate-y-1/2 text-right w-16">
+                            <div class="font-bold text-omnify-accent">SOM</div>
+                        </div>
+                        <div class="font-heading text-5xl font-extrabold text-white mb-2">$4.3M</div>
+                        <p class="text-xs text-white/90">3,600 contractors in Year 1</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 2: Stepped Bar Chart / Staircase -->
+    <div class="slide-container">
+        <div class="title-label">Option 2: The Actionable Staircase</div>
+        <div class="slide bg-white flex flex-col p-20 justify-center">
+
+            <div class="mb-16">
+                <div class="text-omnify-accent text-sm font-bold tracking-widest uppercase mb-4">MARKET SIZE</div>
+                <h2 class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    A $4.3B opportunity.
+                </h2>
+            </div>
+
+            <div class="flex items-end justify-between h-80 gap-6">
+
+                <!-- TAM -->
+                <div class="w-1/3 flex flex-col justify-end h-full relative group">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <div class="font-bold tracking-widest text-gray-400 text-sm mb-1 uppercase">TAM / Total Market
+                        </div>
+                        <div class="font-heading text-5xl font-extrabold text-gray-300 mb-2">$4.3B</div>
+                        <p class="text-sm text-gray-500 w-11/12 text-balance">7.2M home service businesses × $600 avg
+                            SaaS spend</p>
+                    </div>
+                    <div
+                        class="h-full bg-gray-50 border border-t-4 border-gray-200 rounded-t-xl group-hover:bg-gray-100 transition-colors">
+                    </div>
+                </div>
+
+                <!-- SAM -->
+                <div class="w-1/3 flex flex-col justify-end h-3/4 relative group">
+                    <div class="mb-6 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <div class="font-bold tracking-widest text-omnify-dark/50 text-sm mb-1 uppercase">SAM /
+                            Serviceable</div>
+                        <div class="font-heading text-5xl font-extrabold text-omnify-accent/50 mb-2">$428M</div>
+                        <p class="text-sm text-gray-500 w-11/12 text-balance">360K contractors actively using digital
+                            lead tools</p>
+                    </div>
+                    <div
+                        class="h-full bg-omnify-light/50 border border-t-4 border-omnify-accent/30 rounded-t-xl group-hover:bg-omnify-light transition-colors">
+                    </div>
+                </div>
+
+                <!-- SOM -->
+                <div class="w-1/3 flex flex-col justify-end h-1/2 relative group">
+                    <div class="mb-6">
+                        <div class="font-bold tracking-widest text-omnify-accent text-sm mb-1 uppercase">SOM /
+                            Attainable</div>
+                        <div class="font-heading text-6xl font-extrabold text-omnify-accent mb-2">$4.3M</div>
+                        <p class="text-sm text-gray-900 font-medium w-11/12 text-balance">3,600 contractors in Year 1
+                            targets at $99/mo.</p>
+                    </div>
+                    <div
+                        class="h-full bg-omnify-accent border-t-4 border-white shadow-[0_-10px_30px_rgba(34,197,94,0.2)] rounded-t-xl">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 3: Nested Squares (Abstract Grid) -->
+    <div class="slide-container">
+        <div class="title-label">Option 3: Nested Corner Squares</div>
+        <div class="slide bg-white flex p-20 items-center justify-between">
+
+            <div class="w-1/2 z-10">
+                <div
+                    class="inline-flex px-3 py-1 bg-gray-100 text-gray-600 font-mono text-xs font-bold tracking-widest uppercase mb-6 rounded">
+                    TAM / SAM / SOM</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-12">
+                    An immense, highly fragmented <span class="text-omnify-accent">market.</span>
+                </h2>
+
+                <div class="flex items-center space-x-6">
+                    <i data-lucide="arrow-right" class="w-6 h-6 text-omnify-accent"></i>
+                    <p class="text-lg text-gray-600 font-medium font-heading">Focused entirely on taking $4.3M in Year
+                        1.</p>
+                </div>
+            </div>
+
+            <div class="w-1/2 h-[500px] relative flex items-end justify-end">
+
+                <!-- TAM Square -->
+                <div
+                    class="absolute bottom-0 right-0 w-[450px] h-[450px] bg-gray-50 border border-gray-200 rounded-3xl p-8 flex flex-col justify-start items-start transition-all hover:bg-white hover:shadow-xl hover:-translate-y-2 hover:-translate-x-2">
+                    <div class="font-bold text-gray-400 tracking-widest uppercase mb-1">TAM</div>
+                    <div class="font-heading text-5xl font-extrabold text-gray-300 mb-2">$4.3B</div>
+                    <p class="text-xs text-gray-400 w-1/2">7.2M home service businesses <br>× $600 avg SaaS spend</p>
+                </div>
+
+                <!-- SAM Square -->
+                <div
+                    class="absolute bottom-0 right-0 w-[300px] h-[300px] bg-omnify-light/40 border border-omnify-accent/20 rounded-tl-3xl rounded-br-3xl p-8 flex flex-col justify-start items-start backdrop-blur-sm transition-all hover:bg-omnify-light hover:-translate-y-2 hover:-translate-x-2">
+                    <div class="font-bold text-omnify-dark/60 tracking-widest uppercase mb-1">SAM</div>
+                    <div class="font-heading text-5xl font-extrabold text-omnify-dark/60 mb-2">$428M</div>
+                    <p class="text-xs text-omnify-dark/70 w-3/4">360K contractors with digital tools</p>
+                </div>
+
+                <!-- SOM Square -->
+                <div
+                    class="absolute bottom-0 right-0 w-[180px] h-[180px] bg-omnify-accent rounded-tl-3xl rounded-br-3xl p-8 flex flex-col justify-center items-center shadow-lg transform origin-bottom-right transition-transform hover:scale-110">
+                    <div class="font-bold text-white/80 tracking-widest uppercase mb-1">SOM</div>
+                    <div class="font-heading text-4xl font-extrabold text-white mb-1">$4.3M</div>
+                    <p class="text-[10px] text-white/90 text-center leading-tight">3,600 contractors<br>Year 1</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 4: Horizontal Proportion Bar -->
+    <div class="slide-container">
+        <div class="title-label">Option 4: Horizontal Proportion Drill-Down</div>
+        <div class="slide bg-white flex flex-col p-20 justify-center">
+
+            <div class="flex justify-between items-end mb-24">
+                <h2 class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    A <span class="text-omnify-accent">$4.3B</span> opportunity.
+                </h2>
+                <div class="text-omnify-accent text-sm font-bold font-mono tracking-widest uppercase">MARKET SIZE</div>
+            </div>
+
+            <!-- The visual bar -->
+            <div class="relative w-full mb-16">
+                <!-- Connectors -->
+                <svg class="absolute w-full h-32 top-8 left-0 text-gray-200" preserveAspectRatio="none"
+                    viewBox="0 0 100 100">
+                    <path d="M10,0 L20,100 M90,0 L50,100" stroke="currentColor" stroke-width="0.5" fill="none"
+                        class="text-gray-200" />
+                    <path d="M22,100 L30,200 M48,100 L40,200" stroke="currentColor" stroke-width="0.5" fill="none"
+                        class="text-omnify-accent" stroke-opacity="0.3" />
+                </svg>
+
+                <div class="space-y-16 relative z-10 w-full">
+                    <!-- Base Bar (TAM) -->
+                    <div class="w-full relative group">
+                        <div class="h-12 bg-gray-100 rounded-full flex overflow-hidden">
+                            <div class="w-[10%] bg-gray-200 border-r border-white"></div>
+                            <div class="w-[80%] bg-gray-200"></div>
+                            <div class="w-[10%] bg-gray-200 border-l border-white"></div>
+                        </div>
+                        <div class="flex justify-between mt-4">
+                            <div class="font-bold text-gray-400 tracking-widest uppercase">TAM</div>
+                            <div class="text-center">
+                                <div class="font-heading text-3xl font-extrabold text-gray-900">$4.3B</div>
+                                <div class="text-xs text-gray-500">7.2M home service businesses</div>
+                            </div>
+                            <div class="w-12"></div>
+                        </div>
+                    </div>
+
+                    <!-- Middle Bar (SAM) -->
+                    <div class="w-[60%] mx-auto relative group">
+                        <div class="h-12 bg-omnify-light rounded-full flex overflow-hidden">
+                            <div class="w-[20%] bg-omnify-light border-r border-white"></div>
+                            <div class="w-[60%] bg-omnify-light"></div>
+                            <div class="w-[20%] bg-omnify-light border-l border-white"></div>
+                        </div>
+                        <div class="flex justify-between mt-4">
+                            <div class="font-bold text-omnify-dark/50 tracking-widest uppercase mt-1">SAM</div>
+                            <div class="text-center">
+                                <div class="font-heading text-3xl font-extrabold text-gray-900">$428M</div>
+                                <div class="text-xs text-gray-500">360K active digital users</div>
+                            </div>
+                            <div class="w-10"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Bar (SOM) -->
+                    <div class="w-[20%] mx-auto relative">
+                        <div
+                            class="h-16 bg-omnify-accent rounded-full shadow-[0_10px_30px_rgba(34,197,94,0.3)] flex items-center justify-center">
+                            <div class="font-heading text-3xl font-extrabold text-white">$4.3M</div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <div class="font-bold text-omnify-accent tracking-widest uppercase mb-1">SOM</div>
+                            <div class="text-xs font-semibold text-gray-900">3,600 target users in Year 1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 5: Three Distinct Data Cards -->
+    <div class="slide-container">
+        <div class="title-label">Option 5: Clean Typographic Data Cards</div>
+        <div class="slide bg-white flex flex-col p-20 justify-center">
+
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05]">
+                    A $4.3B market opportunity.
+                </h2>
+            </div>
+
+            <div class="flex justify-center gap-8 w-full max-w-5xl mx-auto">
+                <div class="hidden md:block absolute top-[60%] w-[800px] h-0.5 bg-gray-100 -z-10"></div>
+
+                <!-- TAM Card -->
+                <div
+                    class="bg-white border border-gray-200 p-8 rounded-2xl w-1/3 text-center shadow-sm relative group hover:border-gray-300 transition-colors">
+                    <div
+                        class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-100 transition-colors">
+                        <i data-lucide="globe" class="w-6 h-6 text-gray-400"></i>
+                    </div>
+                    <div class="font-bold text-gray-400 tracking-widest uppercase text-sm mb-2">Total Addressable</div>
+                    <div class="font-heading text-5xl font-extrabold text-gray-300 mb-4">$4.3B</div>
+                    <p class="text-sm text-gray-500 border-t border-gray-100 pt-4">7.2M home service businesses in the
+                        US × $600 avg SaaS spend</p>
+                </div>
+
+                <!-- SAM Card -->
+                <div
+                    class="bg-white border border-gray-200 p-8 rounded-2xl w-1/3 text-center shadow-sm relative group hover:border-omnify-accent/50 transition-colors">
+                    <div
+                        class="w-16 h-16 bg-omnify-light/50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-omnify-light transition-colors">
+                        <i data-lucide="target" class="w-6 h-6 text-omnify-dark/50"></i>
+                    </div>
+                    <div class="font-bold text-omnify-dark/60 tracking-widest uppercase text-sm mb-2">Serviceable</div>
+                    <div class="font-heading text-5xl font-extrabold text-gray-900 mb-4">$428M</div>
+                    <p class="text-sm text-gray-500 border-t border-gray-100 pt-4">360K contractors actively paying for
+                        digital lead management tools</p>
+                </div>
+
+                <!-- SOM Card -->
+                <div
+                    class="bg-white border-2 border-omnify-accent p-8 rounded-2xl w-1/3 text-center shadow-[0_10px_30px_rgba(34,197,94,0.1)] relative transform -translate-y-4">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-omnify-accent text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                        YEAR 1 GOAL</div>
+                    <div
+                        class="w-16 h-16 bg-omnify-light rounded-full flex items-center justify-center mx-auto mb-6 mt-2">
+                        <i data-lucide="zap" class="w-6 h-6 text-omnify-accent"></i>
+                    </div>
+                    <div class="font-bold text-omnify-accent tracking-widest uppercase text-sm mb-2">Obtainable</div>
+                    <div class="font-heading text-6xl font-extrabold text-omnify-accent mb-4">$4.3M</div>
+                    <p class="text-sm text-gray-900 font-medium border-t border-gray-100 pt-4">3,600 contractors
+                        converting in Year 1 at $99/mo</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 6: The "Bullseye" Target (Not standard circles) -->
+    <div class="slide-container">
+        <div class="title-label">Option 6: The Asymmetrical Target/Bullseye</div>
+        <div class="slide bg-white flex p-20 items-center justify-between">
+
+            <div class="w-1/2">
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-6">
+                    Drilling down to our <span class="text-omnify-accent font-italic">core.</span>
+                </h2>
+                <div class="text-omnify-accent text-sm font-bold tracking-widest uppercase mb-12">MARKET SIZE</div>
+
+                <div class="space-y-8">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 rounded-full bg-gray-100 mr-4"></div>
+                        <div>
+                            <span class="font-bold flex gap-2"><span class="w-12 text-gray-400">TAM:</span> 7.2M
+                                Businesses</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 rounded-full bg-omnify-light mr-4"></div>
+                        <div>
+                            <span class="font-bold flex gap-2"><span class="w-12 text-omnify-dark/60">SAM:</span> 360K
+                                Active Tool Users</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div
+                            class="w-4 h-4 rounded-full bg-omnify-accent mr-4 shadow-md shadow-omnify-accent/30 hidden">
+                        </div>
+                        <div class="bg-gray-900 text-white px-4 py-2 rounded-lg flex items-center shadow-lg -ml-1">
+                            <span class="w-3 h-3 rounded-full bg-omnify-accent mr-3"></span>
+                            <span class="font-bold flex gap-2"><span class="text-gray-400">SOM:</span> 3,600 Target
+                                Users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Asymmetrical Target -->
+            <div class="w-1/2 flex justify-center items-center relative h-[500px]">
+
+                <!-- TAM Ring -->
+                <div
+                    class="absolute w-[450px] h-[450px] rounded-full border border-dashed border-gray-300 flex items-start justify-center pt-8 hover:border-gray-400 transition-colors">
+                    <div class="bg-white px-2 font-heading font-extrabold text-4xl text-gray-300">$4.3B</div>
+                </div>
+
+                <!-- SAM Ring (Offset) -->
+                <div
+                    class="absolute w-[300px] h-[300px] rounded-full border-4 border-omnify-light bg-white flex items-center justify-end pr-8 translate-y-12 translate-x-8 hover:border-omnify-accent/30 transition-colors">
+                    <div class="bg-white px-2 font-heading font-extrabold text-4xl text-omnify-dark/50">$428M</div>
+                </div>
+
+                <!-- SOM Core (Solid) -->
+                <div
+                    class="absolute w-[180px] h-[180px] rounded-full bg-omnify-accent shadow-[0_20px_40px_rgba(34,197,94,0.4)] flex items-center justify-center translate-y-24 translate-x-12 transform hover:scale-110 transition-transform">
+                    <div class="font-heading font-extrabold text-5xl text-white drop-shadow-md">$4.3M</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 7: Map / Grid Approach -->
+    <div class="slide-container">
+        <div class="title-label">Option 7: The Data Grid</div>
+        <div class="slide bg-white flex flex-col p-20 justify-center pattern-diagonal">
+
+            <div
+                class="bg-white/90 backdrop-blur-md rounded-3xl p-12 border border-white shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-omnify-accent opacity-10 rounded-bl-full"></div>
+
+                <h2
+                    class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-2 text-center">
+                    Market Size
+                </h2>
+                <p class="text-center text-gray-500 mb-12">Total Addressable vs. Serviceable vs. Obtainable</p>
+
+                <div class="grid grid-cols-12 border-t border-l border-gray-200">
+
+                    <!-- Headers -->
+                    <div
+                        class="col-span-2 bg-gray-50 border-r border-b border-gray-200 p-4 font-bold text-gray-500 uppercase tracking-widest text-xs flex items-center justify-center">
+                        Metric</div>
+                    <div
+                        class="col-span-3 bg-gray-50 border-r border-b border-gray-200 p-4 font-bold text-gray-500 uppercase tracking-widest text-xs flex items-center justify-center">
+                        Value</div>
+                    <div
+                        class="col-span-7 bg-gray-50 border-r border-b border-gray-200 p-4 font-bold text-gray-500 uppercase tracking-widest text-xs flex items-center">
+                        Calculation / Target Audience</div>
+
+                    <!-- TAM Row -->
+                    <div
+                        class="col-span-2 border-r border-b border-gray-200 p-6 flex items-center justify-center font-bold text-gray-400">
+                        TAM</div>
+                    <div
+                        class="col-span-3 border-r border-b border-gray-200 p-6 flex items-center justify-center font-heading text-4xl font-extrabold text-gray-300">
+                        $4.3B</div>
+                    <div
+                        class="col-span-7 border-r border-b border-gray-200 p-6 flex items-center text-lg text-gray-600">
+                        7.2M US Home Service Businesses × $600 Average Annual SaaS Spend</div>
+
+                    <!-- SAM Row -->
+                    <div
+                        class="col-span-2 bg-omnify-light/10 border-r border-b border-gray-200 p-6 flex items-center justify-center font-bold text-omnify-dark/60">
+                        SAM</div>
+                    <div
+                        class="col-span-3 bg-omnify-light/10 border-r border-b border-gray-200 p-6 flex items-center justify-center font-heading text-4xl font-extrabold text-omnify-dark">
+                        $428M</div>
+                    <div
+                        class="col-span-7 bg-omnify-light/10 border-r border-b border-gray-200 p-6 flex items-center text-lg text-gray-700">
+                        360K Contractors Actively Paying for Digital Lead Management Tools</div>
+
+                    <!-- SOM Row -->
+                    <div
+                        class="col-span-2 bg-omnify-accent border-r border-b border-omnify-accent p-6 flex items-center justify-center font-bold text-white">
+                        SOM</div>
+                    <div
+                        class="col-span-3 bg-omnify-accent border-r border-b border-omnify-accent p-6 flex items-center justify-center font-heading text-5xl font-extrabold text-white shadow-inner">
+                        $4.3M</div>
+                    <div
+                        class="col-span-7 bg-gray-900 border-r border-b border-gray-900 p-6 flex items-center text-xl text-white font-medium">
+                        3,600 Contractors Converting in Year 1 Targeting at $99/mo</div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 8: Horizontal Flow / Timeline Style -->
+    <div class="slide-container">
+        <div class="title-label">Option 8: Horizontal Zoom-In Pathway</div>
+        <div class="slide bg-white flex flex-col p-20 justify-center">
+
+            <h2
+                class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-20 text-center">
+                Refining a massive market.
+            </h2>
+
+            <!-- The Pathway -->
+            <div class="relative w-full max-w-5xl mx-auto pl-12 pr-12">
+
+                <!-- Main connecting line -->
+                <div class="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-2 bg-gray-100 rounded-full z-0"></div>
+                <div
+                    class="absolute top-1/2 -translate-y-1/2 left-0 w-3/4 h-2 bg-gradient-to-r from-transparent via-omnify-light to-omnify-accent rounded-full z-0">
+                </div>
+
+                <div class="flex justify-between relative z-10 w-full">
+
+                    <!-- TAM Node -->
+                    <div class="flex flex-col items-center w-64 -mx-12">
+                        <div class="mb-4 text-center">
+                            <div class="font-bold text-gray-400 text-sm tracking-widest uppercase mb-1">TOTAL MKT</div>
+                            <div class="font-heading text-4xl font-extrabold text-gray-300">$4.3B</div>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border-4 border-gray-200 bg-white"></div>
+                        <div class="mt-4 text-center text-xs text-gray-500 px-4">7.2M businesses</div>
+                    </div>
+
+                    <div class="h-8 flex items-center self-center text-gray-300"><i data-lucide="chevron-right"></i>
+                    </div>
+
+                    <!-- SAM Node -->
+                    <div class="flex flex-col items-center w-64 -mx-12 transform -translate-y-6">
+                        <div class="mb-4 text-center">
+                            <div class="font-bold text-omnify-dark/60 text-sm tracking-widest uppercase mb-1">ACTIVE
+                                USERS</div>
+                            <div class="font-heading text-5xl font-extrabold text-gray-900">$428M</div>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border-4 border-omnify-light bg-white"></div>
+                        <div class="mt-4 text-center text-xs text-gray-500 px-4">360K active digital users</div>
+                    </div>
+
+                    <div class="h-8 flex items-center self-center text-omnify-light"><i
+                            data-lucide="chevron-right"></i><i data-lucide="chevron-right" class="-ml-3"></i></div>
+
+                    <!-- SOM Node -->
+                    <div class="flex flex-col items-center w-72 -mx-12 transform -translate-y-12">
+                        <div class="mb-4 text-center bg-gray-900 text-white p-4 rounded-xl shadow-xl relative w-full">
+                            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-gray-900 rotate-45">
+                            </div>
+                            <div class="font-bold text-omnify-accent text-sm tracking-widest uppercase mb-1">YEAR 1
+                                CAPTURE</div>
+                            <div class="font-heading text-6xl font-extrabold text-omnify-accent drop-shadow">$4.3M</div>
+                        </div>
+                        <div
+                            class="w-16 h-16 mt-2 rounded-full border-4 border-white bg-omnify-accent shadow-[0_0_20px_rgba(34,197,94,0.5)] flex items-center justify-center">
+                            <div class="w-8 h-8 border-2 border-white/50 rounded-full"></div>
+                        </div>
+                        <div class="mt-4 text-center text-sm font-bold text-gray-900 px-4">3,600 target users</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 9: Vertical Waterfall -->
+    <div class="slide-container">
+        <div class="title-label">Option 9: Vertical Left-Aligned Waterfall</div>
+        <div class="slide bg-white flex p-20 items-center">
+
+            <div class="w-5/12 pr-16 bg-white z-10">
+                <div
+                    class="inline-flex px-3 py-1 bg-omnify-light text-omnify-dark text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
+                    MARKET SIZE</div>
+                <h2 class="font-heading text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-6">
+                    A <span class="text-omnify-accent">$4.3B</span> opportunity.
+                </h2>
+                <p class="text-lg text-gray-500 font-medium leading-relaxed">
+                    We are targeting a highly specific, rapidly growing segment of the home service market.
+                </p>
+                <div class="mt-8 border border-gray-100 rounded-xl p-4 flex items-start bg-gray-50">
+                    <i data-lucide="info" class="text-gray-400 w-5 h-5 mr-3 mt-0.5"></i>
+                    <p class="text-xs text-gray-500">TAM is calculated based on 7.2M home service businesses in the US
+                        with an average $600/yr SaaS spend.</p>
+                </div>
+            </div>
+
+            <div class="w-7/12 border-l border-gray-100 pl-16 relative py-8">
+                <!-- Guide line -->
+                <div class="absolute left-16 top-16 bottom-16 w-1 bg-gray-100 rounded"></div>
+
+                <div class="space-y-16 relative">
+
+                    <!-- TAM -->
+                    <div class="relative pl-12">
+                        <div class="absolute left-[-6px] top-4 w-4 h-4 rounded-full bg-gray-300 border-2 border-white">
+                        </div>
+                        <div class="font-bold text-gray-400 tracking-widest uppercase text-xs mb-1">TOTAL ADDRESSABLE
+                            (TAM)</div>
+                        <div class="font-heading text-5xl font-extrabold text-gray-300 mb-1">$4.3B</div>
+                        <p class="text-gray-500 text-sm">7.2M businesses</p>
+                    </div>
+
+                    <!-- SAM -->
+                    <div class="relative pl-12 bg-white pt-2">
+                        <div
+                            class="absolute left-[-24px] top-6 w-12 h-1 bg-gray-900 group-hover:bg-omnify-accent transition-colors">
+                        </div>
+                        <div class="font-bold text-gray-900 tracking-widest uppercase text-xs mb-1">SERVICEABLE (SAM)
+                        </div>
+                        <div class="font-heading text-6xl font-extrabold text-gray-900 mb-1">$428M</div>
+                        <p class="text-gray-500 font-medium">360K contractors with existing digital tools</p>
+                    </div>
+
+                    <!-- SOM -->
+                    <div class="relative pl-12">
+                        <div
+                            class="absolute left-[-8px] top-4 w-5 h-5 rounded-full bg-omnify-accent border-4 border-white shadow-[0_0_15px_rgba(34,197,94,0.5)]">
+                        </div>
+                        <div class="font-bold text-omnify-accent tracking-widest uppercase text-xs mb-1">YEAR 1 CAPTURE
+                            (SOM)</div>
+                        <div class="font-heading text-7xl font-extrabold text-omnify-accent mb-1">$4.3M</div>
+                        <p class="text-gray-900 font-bold bg-gray-100 inline-block px-3 py-1 rounded text-sm mt-2">3,600
+                            users @ $99/mo</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- OPTION 10: Stacked Blocks (Minimalist 3D) -->
+    <div class="slide-container">
+        <div class="title-label">Option 10: Minimalist Stacked Slices</div>
+        <div class="slide bg-white flex flex-col items-center justify-center p-20">
+
+            <h2
+                class="font-heading text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-16 text-center">
+                Visualizing the market.
+            </h2>
+
+            <div class="relative w-[800px] h-[300px] flex flex-col justify-end items-center perspective-1000">
+
+                <!-- TAM Base -->
+                <div
+                    class="w-full bg-gray-50 border border-t-2 border-gray-200 h-24 rounded-2xl flex items-center justify-between px-10 shadow-sm transition-transform hover:-translate-y-1">
+                    <div class="text-left">
+                        <div class="font-bold text-gray-400 tracking-widest uppercase">TAM</div>
+                        <p class="text-xs text-gray-500">Total Market</p>
+                    </div>
+                    <div class="font-heading text-4xl font-extrabold text-gray-300">$4.3B</div>
+                </div>
+
+                <!-- SAM Middle (Z-indexed above) -->
+                <div
+                    class="w-[70%] bg-white border border-t-2 border-omnify-light h-28 rounded-2xl flex items-center justify-between px-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] -mt-10 relative z-10 transition-transform hover:-translate-y-2">
+                    <div class="text-left">
+                        <div class="font-bold text-omnify-dark/60 tracking-widest uppercase">SAM</div>
+                        <p class="text-xs text-gray-500">Serviceable Segment</p>
+                    </div>
+                    <div class="font-heading text-5xl font-extrabold text-gray-900">$428M</div>
+                </div>
+
+                <!-- SOM Top (Z-indexed highest) -->
+                <div
+                    class="w-[40%] bg-gray-900 border-b-8 border-omnify-accent h-32 rounded-2xl flex items-center justify-between px-10 shadow-[0_20px_50px_rgba(34,197,94,0.3)] -mt-12 relative z-20 transform hover:-translate-y-4 transition-transform duration-300">
+                    <div class="text-left">
+                        <div class="font-bold text-omnify-accent tracking-widest uppercase">SOM</div>
+                        <p class="text-xs text-gray-400">Year 1 Goal</p>
+                    </div>
+                    <div class="font-heading text-6xl font-extrabold text-white">$4.3M</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
