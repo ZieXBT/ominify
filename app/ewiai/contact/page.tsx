@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Script from 'next/script';
 import { EWIAINavigation } from '@/components/ewiai/EWIAINavigation';
 import { EWIAIFooter } from '@/components/ewiai/EWIAIFooter';
 import { EWIAIFloatingOrbs } from '@/components/ewiai/EWIAIFloatingOrbs';
@@ -14,7 +15,7 @@ export default function EWIAIContactPage() {
             <EWIAINavigation />
 
             <main className="w-full relative z-10 flex-1">
-                <section className="w-full max-w-5xl mx-auto px-5 pt-32 pb-20">
+                <section className="w-full max-w-6xl mx-auto px-5 pt-32 pb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -33,25 +34,16 @@ export default function EWIAIContactPage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
-                        className="max-w-3xl mx-auto"
+                        className="mx-auto"
                     >
-                        {/* Calendly Embed Placeholder */}
-                        <div className="ewiai-glass-card p-8 md:p-12 border-blue-500/10">
-                            <div className="w-full min-h-[600px] rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-center">
-                                {/* Replace this div with your Calendly embed */}
-                                <div className="text-center p-8">
-                                    <div className="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-4">
-                                        <svg className="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="text-xl font-semibold text-white mb-2">Calendly Booking Widget</h3>
-                                    <p className="text-gray-500 text-sm max-w-sm mx-auto">
-                                        Your Calendly embed will appear here. Replace this placeholder with your Calendly inline widget code.
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-blue-500/5">
+                            <div
+                                className="calendly-inline-widget w-full"
+                                data-url="https://calendly.com/ewiai/dfy-ai-sales-system?hide_gdpr_banner=1&primary_color=3b82f6"
+                                style={{ minWidth: '320px', height: '1000px' }}
+                            />
                         </div>
+                        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
 
                         <p className="text-center text-gray-500 text-xs mt-6">
                             Disclaimer: By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message &amp; data rates may apply. You can reply STOP to opt-out of further messaging.

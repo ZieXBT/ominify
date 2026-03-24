@@ -91,7 +91,7 @@ export default function EWIAIPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="relative mb-6"
+              className="relative mb-6 hidden md:block"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/15 via-blue-400/5 to-blue-500/15 rounded-full blur-lg" />
               <div className="relative inline-flex items-center gap-3 text-base font-medium px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/10 to-blue-500/10 border border-blue-500/25 backdrop-blur-sm">
