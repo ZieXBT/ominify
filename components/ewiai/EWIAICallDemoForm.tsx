@@ -1,14 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Loader2, Phone, User, Mail, Globe, PhoneCall, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { ArrowRight, Phone, User, Mail, Globe, PhoneCall, ChevronDown } from 'lucide-react';
 
 const countryCodes = [
     { code: '+1', country: 'US', flag: '🇺🇸', name: 'United States' },
@@ -42,24 +36,19 @@ function detectCountryFromTimezone(): string {
     } catch { return 'US'; }
 }
 
-const schema = z.object({
-    name: z.string().min(2, 'Name must be at least 2 characters'),
-    phone: z.string().min(6, 'Phone number must be at least 6 digits').regex(/^[\d\s\-\(\)]+$/, 'Please enter a valid phone number'),
-    website: z.string().url('Please enter a valid website URL').or(z.string().regex(/^[\w\-]+(\.[\w\-]+)+/, 'Please enter a valid website')),
-    email: z.string().email('Please enter a valid email address'),
-});
-
-type FormData = z.infer<typeof schema>;
-
 export function EWIAICallDemoForm() {
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [submitError, setSubmitError] = useState<string | null>(null);
     const [focusedField, setFocusedField] = useState<string | null>(null);
-    const [countdown, setCountdown] = useState(10);
     const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
     const [showCountryPicker, setShowCountryPicker] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [countdown, setCountdown] = useState(10);
 
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) });
+    // Form field states
+    const [name, setName] = useState('');
+    const [phoneNum, setPhoneNum] = useState('');
+    const [website, setWebsite] = useState('');
+    const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     useEffect(() => {
         const detected = detectCountryFromTimezone();
@@ -82,22 +71,22 @@ export function EWIAICallDemoForm() {
         }
     }, [showCountryPicker]);
 
-    const onSubmit = async (data: FormData) => {
-        setSubmitError(null);
-        try {
-            const fullPhone = `${selectedCountry.code}${data.phone.replace(/\D/g, '')}`;
-            const response = await fetch('/api/call-demo', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...data, phone: fullPhone }),
-            });
-            const result = await response.json();
-            if (!response.ok) {
-                setSubmitError(response.status === 409 ? 'You\'ve already requested a demo call!' : result.error || 'Something went wrong.');
-                return;
-            }
-            setIsSubmitted(true);
-            setCountdown(10);
-        } catch { setSubmitError('Network error. Check connection.'); }
+    const validate = () => {
+        const errs: Record<string, string> = {};
+        if (name.length < 2) errs.name = 'Name must be at least 2 characters';
+        if (!/^[\d\s\-\(\)]{6,}$/.test(phoneNum)) errs.phone = 'Please enter a valid phone number';
+        if (!website.match(/^[\w\-]+(\.[\w\-]+)+/) && !website.match(/^https?:\/\//)) errs.website = 'Please enter a valid website';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.email = 'Please enter a valid email address';
+        setErrors(errs);
+        return Object.keys(errs).length === 0;
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!validate()) return;
+        // Show success animation — actual API integration will be added later
+        setIsSubmitted(true);
+        setCountdown(10);
     };
 
     if (isSubmitted) {
@@ -113,16 +102,6 @@ export function EWIAICallDemoForm() {
                             transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }} />
                     ))}
                 </div>
-                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="relative z-10 w-full mb-6">
-                    <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/40 rounded-2xl p-5 relative overflow-hidden">
-                        <div className="absolute top-3 right-3"><span className="bg-blue-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Early Adopter</span></div>
-                        <div className="text-center mb-3">
-                            <div className="flex items-center justify-center gap-2 mb-1"><span className="text-4xl font-bold text-white">$497</span><span className="text-white/60 text-lg">/mo</span></div>
-                            <div className="flex items-center justify-center gap-2"><span className="text-white/40 text-sm line-through">$997/mo</span><span className="text-blue-400 text-sm font-semibold">50% off forever</span></div>
-                        </div>
-                        <div className="text-center pt-3 border-t border-blue-500/20"><p className="text-blue-400 text-xs font-medium">✓ You&apos;re on the list • We&apos;ll call you shortly</p></div>
-                    </div>
-                </motion.div>
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }} className="relative z-10 mb-4">
                     <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
                         className="w-14 h-14 mx-auto mb-3 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/25">
@@ -149,7 +128,7 @@ export function EWIAICallDemoForm() {
         );
     }
 
-    const fieldClass = "bg-white/[0.03] border-white/10 text-white placeholder:text-white/25 h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-blue-500/30 focus-visible:border-blue-500/50 transition-all duration-200 hover:border-white/20";
+    const fieldClass = "w-full bg-white/[0.03] border border-white/10 text-white placeholder:text-white/25 h-11 rounded-xl px-10 focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all duration-200 hover:border-white/20 outline-none text-sm";
 
     return (
         <motion.div className="ewiai-glass-card max-w-md mx-auto p-[1px] relative" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -163,23 +142,23 @@ export function EWIAICallDemoForm() {
                     <h2 className="text-2xl font-bold text-white mb-3">Get a call in 30 seconds</h2>
                     <p className="text-sm text-gray-400">Our AI will scan your website, learn your services, then call you like a real customer would hear it.</p>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="space-y-1.5">
-                        <Label htmlFor="ewiai-name" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1">Your Name</Label>
+                        <label htmlFor="ewiai-name" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1 block">Your Name</label>
                         <div className="relative group">
-                            <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200 ${focusedField === 'name' ? 'text-blue-400' : 'text-gray-500'}`}><User className="w-4 h-4" /></div>
-                            <Input id="ewiai-name" type="text" {...register('name')} placeholder="John Smith" onFocus={() => setFocusedField('name')} onBlur={() => setFocusedField(null)} className={`pl-10 ${fieldClass}`} />
+                            <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200 z-10 ${focusedField === 'name' ? 'text-blue-400' : 'text-gray-500'}`}><User className="w-4 h-4" /></div>
+                            <input id="ewiai-name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="John Smith" onFocus={() => setFocusedField('name')} onBlur={() => setFocusedField(null)} className={fieldClass} />
                         </div>
-                        <AnimatePresence>{errors.name && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.name?.message}</motion.p>}</AnimatePresence>
+                        <AnimatePresence>{errors.name && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.name}</motion.p>}</AnimatePresence>
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.18 }} className="space-y-1.5">
-                        <Label htmlFor="ewiai-phone" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1">Phone Number</Label>
-                        <div className="relative group flex">
-                            <div className="relative">
+                        <label htmlFor="ewiai-phone" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1 block">Phone Number</label>
+                        <div className="relative group flex gap-0">
+                            <div className="relative flex-shrink-0">
                                 <button type="button" onClick={(e) => { e.stopPropagation(); setShowCountryPicker(!showCountryPicker); }}
-                                    className="h-11 px-3 bg-white/[0.03] border border-white/10 border-r-0 rounded-l-xl flex items-center gap-1.5 hover:bg-white/[0.06] transition-colors">
-                                    <span className="text-lg">{selectedCountry.flag}</span><span className="text-sm text-gray-300">{selectedCountry.code}</span><ChevronDown className="w-3 h-3 text-gray-500" />
+                                    className="h-11 px-3 bg-white/[0.03] border border-white/10 border-r-0 rounded-l-xl flex items-center gap-1.5 hover:bg-white/[0.06] transition-colors whitespace-nowrap">
+                                    <span className="text-lg leading-none">{selectedCountry.flag}</span><span className="text-sm text-gray-300">{selectedCountry.code}</span><ChevronDown className="w-3 h-3 text-gray-500" />
                                 </button>
                                 <AnimatePresence>
                                     {showCountryPicker && (
@@ -195,42 +174,35 @@ export function EWIAICallDemoForm() {
                                     )}
                                 </AnimatePresence>
                             </div>
-                            <Input id="ewiai-phone" type="tel" {...register('phone')} placeholder="(555) 123-4567" onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)} className={`flex-1 rounded-l-none rounded-r-xl ${fieldClass}`} />
+                            <input id="ewiai-phone" type="tel" value={phoneNum} onChange={e => setPhoneNum(e.target.value)} placeholder="(555) 123-4567" onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)}
+                                className="flex-1 min-w-0 bg-white/[0.03] border border-white/10 text-white placeholder:text-white/25 h-11 rounded-r-xl px-4 focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all duration-200 hover:border-white/20 outline-none text-sm" />
                         </div>
-                        <AnimatePresence>{errors.phone && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.phone?.message}</motion.p>}</AnimatePresence>
+                        <AnimatePresence>{errors.phone && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.phone}</motion.p>}</AnimatePresence>
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.26 }} className="space-y-1.5">
-                        <Label htmlFor="ewiai-website" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1">Website</Label>
+                        <label htmlFor="ewiai-website" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1 block">Website</label>
                         <div className="relative group">
-                            <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200 ${focusedField === 'website' ? 'text-blue-400' : 'text-gray-500'}`}><Globe className="w-4 h-4" /></div>
-                            <Input id="ewiai-website" type="text" {...register('website')} placeholder="yourcompany.com" onFocus={() => setFocusedField('website')} onBlur={() => setFocusedField(null)} className={`pl-10 ${fieldClass}`} />
+                            <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200 z-10 ${focusedField === 'website' ? 'text-blue-400' : 'text-gray-500'}`}><Globe className="w-4 h-4" /></div>
+                            <input id="ewiai-website" type="text" value={website} onChange={e => setWebsite(e.target.value)} placeholder="yourcompany.com" onFocus={() => setFocusedField('website')} onBlur={() => setFocusedField(null)} className={fieldClass} />
                         </div>
-                        <AnimatePresence>{errors.website && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.website?.message}</motion.p>}</AnimatePresence>
+                        <AnimatePresence>{errors.website && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.website}</motion.p>}</AnimatePresence>
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.34 }} className="space-y-1.5">
-                        <Label htmlFor="ewiai-email" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1">Email</Label>
+                        <label htmlFor="ewiai-email" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1 block">Email</label>
                         <div className="relative group">
-                            <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200 ${focusedField === 'email' ? 'text-blue-400' : 'text-gray-500'}`}><Mail className="w-4 h-4" /></div>
-                            <Input id="ewiai-email" type="email" {...register('email')} placeholder="john@company.com" onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} className={`pl-10 ${fieldClass}`} />
+                            <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors duration-200 z-10 ${focusedField === 'email' ? 'text-blue-400' : 'text-gray-500'}`}><Mail className="w-4 h-4" /></div>
+                            <input id="ewiai-email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="john@company.com" onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} className={fieldClass} />
                         </div>
-                        <AnimatePresence>{errors.email && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.email?.message}</motion.p>}</AnimatePresence>
+                        <AnimatePresence>{errors.email && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.email}</motion.p>}</AnimatePresence>
                     </motion.div>
 
-                    <AnimatePresence>
-                        {submitError && (
-                            <motion.div initial={{ opacity: 0, y: -10, height: 0 }} animate={{ opacity: 1, y: 0, height: 'auto' }} exit={{ opacity: 0, y: -10, height: 0 }} className="p-3 rounded-xl bg-red-500/10 border border-red-500/20">
-                                <p className="text-xs text-red-400 text-center">{submitError}</p>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="pt-2">
-                        <Button type="submit" disabled={isSubmitting}
-                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 border border-blue-400/20 transition-all duration-300 group">
-                            {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <><PhoneCall className="w-4 h-4 mr-2" /><span>Call Me in 30 Seconds</span><ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></>}
-                        </Button>
+                        <button type="submit"
+                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 border border-blue-400/20 transition-all duration-300 group flex items-center justify-center">
+                            <PhoneCall className="w-4 h-4 mr-2" /><span>Call Me in 30 Seconds</span><ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </button>
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex items-center justify-center gap-2 text-[11px] text-gray-500 pt-1">

@@ -135,7 +135,9 @@ export function CallDemoForm() {
             const result = await response.json();
 
             if (!response.ok) {
-                if (response.status === 409) {
+                if (response.status === 429) {
+                    setSubmitError('You\'ve reached the daily limit (3 demos/day). Please try again tomorrow.');
+                } else if (response.status === 409) {
                     setSubmitError('You\'ve already requested a demo call!');
                 } else {
                     setSubmitError(result.error || 'Something went wrong. Please try again.');

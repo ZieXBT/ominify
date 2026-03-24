@@ -7,29 +7,32 @@ const steps = [
     {
         number: "01",
         icon: Phone,
-        title: "Discovery call",
-        description: "We learn your sales process and business needs in a quick 30-minute call.",
-        gradient: "from-blue-500 to-cyan-400",
+        title: "Connect your phone",
+        description: "Link your existing phone number and calendar. Takes 2 minutes.",
+        gradient: "from-emerald-500 to-teal-400",
         bgGradient: "from-blue-500/20 to-blue-600/5",
         iconColor: "text-blue-400",
+        badgeColor: "bg-gradient-to-br from-emerald-500 to-teal-400",
     },
     {
         number: "02",
         icon: Brain,
-        title: "Build your AI agent",
-        description: "We train a custom AI voice agent on your pitch, objections, and booking flow.",
-        gradient: "from-blue-500 to-blue-400",
-        bgGradient: "from-blue-500/20 to-blue-600/5",
-        iconColor: "text-blue-400",
+        title: "Train your AI",
+        description: "Tell it your services, pricing, and service area in plain English.",
+        gradient: "from-emerald-500 to-emerald-400",
+        bgGradient: "from-emerald-500/20 to-emerald-600/5",
+        iconColor: "text-emerald-400",
+        badgeColor: "bg-gradient-to-br from-emerald-500 to-emerald-400",
     },
     {
         number: "03",
         icon: Zap,
-        title: "Launch & scale",
-        description: "Go live in 14 days. Watch appointments fill your calendar on autopilot.",
-        gradient: "from-blue-600 to-cyan-400",
-        bgGradient: "from-blue-600/20 to-blue-700/5",
-        iconColor: "text-blue-300",
+        title: "Go live",
+        description: "AI starts handling calls, texts, and chats instantly. Watch your calendar fill up.",
+        gradient: "from-purple-500 to-violet-400",
+        bgGradient: "from-purple-500/20 to-violet-600/5",
+        iconColor: "text-purple-400",
+        badgeColor: "bg-gradient-to-br from-purple-500 to-violet-400",
     }
 ];
 
@@ -37,7 +40,7 @@ export function EWIAIHowItWorks() {
     return (
         <section className="w-full py-20 px-6 relative overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/[0.02] to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.02] to-transparent" />
 
             <div className="max-w-5xl mx-auto relative z-10">
                 {/* Header */}
@@ -53,20 +56,20 @@ export function EWIAIHowItWorks() {
                         viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06] mb-6"
                     >
-                        <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                        <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Our Process</span>
+                        <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Simple Setup</span>
                     </motion.div>
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">
-                        Live in <span className="bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">14 days</span>.
+                        Up and running in <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">15 minutes</span>.
                     </h2>
-                    <p className="text-gray-400 text-lg max-w-xl mx-auto">No coding required. We handle everything end-to-end.</p>
+                    <p className="text-gray-400 text-lg max-w-xl mx-auto">No coding required. Just simple setup.</p>
                 </motion.div>
 
                 {/* Steps Container */}
                 <div className="relative">
                     {/* Connecting Line - Centered with icons */}
                     <div className="hidden md:block absolute top-16 left-[calc(16.67%+40px)] right-[calc(16.67%+40px)] h-0.5">
-                        <div className="h-full bg-gradient-to-r from-blue-500/50 via-blue-400/50 to-blue-500/50 rounded-full" />
+                        <div className="h-full bg-gradient-to-r from-emerald-500/50 via-teal-400/50 to-purple-500/50 rounded-full" />
                         <motion.div
                             className="absolute top-0 h-full w-20 bg-gradient-to-r from-transparent via-white/60 to-transparent rounded-full"
                             animate={{ x: ['-100%', '500%'] }}
@@ -101,7 +104,7 @@ export function EWIAIHowItWorks() {
 
                                     {/* Step Number Badge */}
                                     <motion.div
-                                        className={`absolute -top-2 -right-2 w-9 h-9 rounded-lg bg-gradient-to-br ${step.gradient} flex items-center justify-center text-white font-bold text-xs shadow-lg`}
+                                        className={`absolute -top-2 -right-2 w-9 h-9 rounded-lg ${step.badgeColor} flex items-center justify-center text-white font-bold text-xs shadow-lg`}
                                         whileHover={{ scale: 1.1 }}
                                     >
                                         {step.number}
@@ -135,7 +138,7 @@ export function EWIAIHowItWorks() {
                     className="text-center mt-16"
                 >
                     <p className="text-gray-500 text-sm">
-                        Average setup time: <span className="text-blue-400 font-semibold">14 days</span>
+                        Average setup time: <span className="text-emerald-400 font-semibold">12 minutes</span>
                     </p>
                 </motion.div>
             </div>

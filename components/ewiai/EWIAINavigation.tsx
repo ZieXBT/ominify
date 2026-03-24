@@ -15,9 +15,9 @@ export function EWIAINavigation() {
     });
 
     const navLinks = [
-        { href: "#features", label: "Features" },
-        { href: "#how-it-works", label: "How it Works" },
-        { href: "#channels", label: "Channels" },
+        { href: "/ewiai#features", label: "Features" },
+        { href: "/ewiai#how-it-works", label: "How it Works" },
+        { href: "/ewiai#channels", label: "Channels" },
         { href: "/ewiai/case-studies", label: "Case Studies" },
     ];
 
@@ -28,7 +28,7 @@ export function EWIAINavigation() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${isScrolled
-                    ? 'bg-[#0a0b1e]/90 backdrop-blur-xl border-b border-white/[0.06] py-3 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+                    ? 'bg-[#0a0b1e]/90 backdrop-blur-xl border-b border-transparent py-3 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
                     : 'py-5 bg-transparent'}`}
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
