@@ -1,0 +1,115 @@
+/* EWIAI Theme - Deep Blue Color Scheme */
+
+/* Background Gradients */
+.ewiai-bg-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(42, 36, 214, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(42, 36, 214, 0.08), transparent),
+    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(59, 130, 246, 0.08), transparent);
+  pointer-events: none;
+  z-index: -2;
+}
+
+.ewiai-bg-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: -1;
+  mask-image: linear-gradient(to bottom, black 30%, transparent 70%);
+}
+
+/* Glass Card - EWIAI Theme */
+.ewiai-glass-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.008) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(8px);
+}
+
+.ewiai-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(42, 36, 214, 0.4) 50%, transparent 90%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.ewiai-glass-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(42, 36, 214, 0.25);
+  box-shadow:
+    0 20px 50px -12px rgba(42, 36, 214, 0.15),
+    0 0 30px -8px rgba(42, 36, 214, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.ewiai-glass-card:hover::before {
+  opacity: 1;
+}
+
+/* Text Gradient - EWIAI */
+.ewiai-text-gradient-sub {
+  background: linear-gradient(135deg, #60a5fa, #2a24d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar - EWIAI */
+.ewiai-page ::-webkit-scrollbar-thumb {
+  background: rgba(42, 36, 214, 0.3);
+}
+
+.ewiai-page ::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 36, 214, 0.5);
+}
+
+/* Selection color - EWIAI */
+.ewiai-page ::selection {
+  background: rgba(42, 36, 214, 0.3);
+  color: #fff;
+}
+
+/* Focus states - EWIAI */
+.ewiai-page *:focus-visible {
+  outline: 2px solid rgba(42, 36, 214, 0.5);
+  outline-offset: 2px;
+}
+
+/* Preview Window Dots */
+.ewiai-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.ewiai-dot-red {
+  background: #ff5f57;
+}
+
+.ewiai-dot-yellow {
+  background: #febc2e;
+}
+
+.ewiai-dot-green {
+  background: #28c840;
+}
