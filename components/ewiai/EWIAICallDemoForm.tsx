@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Phone, User, Mail, Globe, PhoneCall, ChevronDown } from 'lucide-react';
+import { ArrowRight, Loader2, Phone, User, Mail, Globe, PhoneCall, ChevronDown } from 'lucide-react';
 
 const countryCodes = [
     { code: '+1', country: 'US', flag: '🇺🇸', name: 'United States' },
@@ -41,6 +41,8 @@ export function EWIAICallDemoForm() {
     const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
     const [showCountryPicker, setShowCountryPicker] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const [countdown, setCountdown] = useState(10);
 
     // Form field states
@@ -49,6 +51,10 @@ export function EWIAICallDemoForm() {
     const [website, setWebsite] = useState('');
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [showTurnstile, setShowTurnstile] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const turnstileRef = useRef<HTMLDivElement>(null);
+    const turnstileWidgetId = useRef<string | null>(null);
 
     useEffect(() => {
         const detected = detectCountryFromTimezone();
@@ -71,6 +77,36 @@ export function EWIAICallDemoForm() {
         }
     }, [showCountryPicker]);
 
+    // Load Turnstile script
+    useEffect(() => {
+        if (!showTurnstile) return;
+        if (document.getElementById('cf-turnstile-script')) return;
+        const script = document.createElement('script');
+        script.id = 'cf-turnstile-script';
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+        script.async = true;
+        document.head.appendChild(script);
+    }, [showTurnstile]);
+
+    const renderTurnstile = useCallback(() => {
+        if (!turnstileRef.current || turnstileWidgetId.current) return;
+        const w = window as unknown as { turnstile?: { render: (el: HTMLElement, opts: Record<string, unknown>) => string } };
+        if (!w.turnstile) return;
+        turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
+            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '',
+            callback: (token: string) => setTurnstileToken(token),
+            'expired-callback': () => setTurnstileToken(null),
+            theme: 'dark',
+        });
+    }, []);
+
+    useEffect(() => {
+        if (!showTurnstile) return;
+        const w = window as unknown as { onTurnstileLoad?: () => void; turnstile?: unknown };
+        if (w.turnstile) { renderTurnstile(); } else { w.onTurnstileLoad = renderTurnstile; }
+        return () => { w.onTurnstileLoad = undefined; };
+    }, [showTurnstile, renderTurnstile]);
+
     const validate = () => {
         const errs: Record<string, string> = {};
         if (name.length < 2) errs.name = 'Name must be at least 2 characters';
@@ -81,12 +117,46 @@ export function EWIAICallDemoForm() {
         return Object.keys(errs).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validate()) return;
-        // Show success animation — actual API integration will be added later
-        setIsSubmitted(true);
-        setCountdown(10);
+
+        setIsSubmitting(true);
+        setSubmitError(null);
+
+        try {
+            const fullPhone = `${selectedCountry.code}${phoneNum.replace(/\D/g, '')}`;
+
+            const response = await fetch('/api/call-demo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone: fullPhone, website, email, turnstileToken: turnstileToken || undefined }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                if (response.status === 429) {
+                    setSubmitError('You\'ve reached the daily limit (3 demos/day). Please try again tomorrow.');
+                } else if (response.status === 403 && result.captcha_required) {
+                    setShowTurnstile(true);
+                    setSubmitError('Please complete the verification below, then submit again.');
+                } else if (response.status === 409) {
+                    setSubmitError('You\'ve already requested a demo call!');
+                } else {
+                    setSubmitError(result.error || 'Something went wrong. Please try again.');
+                }
+                setIsSubmitting(false);
+                return;
+            }
+
+            setIsSubmitted(true);
+            setCountdown(10);
+        } catch {
+            setSubmitError('Network error. Check connection.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (isSubmitted) {
@@ -198,10 +268,25 @@ export function EWIAICallDemoForm() {
                         <AnimatePresence>{errors.email && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.email}</motion.p>}</AnimatePresence>
                     </motion.div>
 
+                    <AnimatePresence>
+                        {submitError && (
+                            <motion.div initial={{ opacity: 0, y: -10, height: 0 }} animate={{ opacity: 1, y: 0, height: 'auto' }} exit={{ opacity: 0, y: -10, height: 0 }} className="p-3 rounded-xl bg-red-500/10 border border-red-500/20">
+                                <p className="text-xs text-red-400 text-center">{submitError}</p>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {/* Turnstile Widget */}
+                    {showTurnstile && (
+                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="flex justify-center">
+                            <div ref={turnstileRef} />
+                        </motion.div>
+                    )}
+
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="pt-2">
-                        <button type="submit"
-                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 border border-blue-400/20 transition-all duration-300 group flex items-center justify-center">
-                            <PhoneCall className="w-4 h-4 mr-2" /><span>Call Me in 30 Seconds</span><ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        <button type="submit" disabled={isSubmitting}
+                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 border border-blue-400/20 transition-all duration-300 group flex items-center justify-center disabled:opacity-50">
+                            {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <><PhoneCall className="w-4 h-4 mr-2" /><span>Call Me in 30 Seconds</span><ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></>}
                         </button>
                     </motion.div>
 
