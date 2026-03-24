@@ -212,7 +212,7 @@ export function EWIAICallDemoForm() {
                     <h2 className="text-2xl font-bold text-white mb-3">Get a call in 30 seconds</h2>
                     <p className="text-sm text-gray-400">Our AI will scan your website, learn your services, then call you like a real customer would hear it.</p>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 text-left">
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="space-y-1.5">
                         <label htmlFor="ewiai-name" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1 block">Your Name</label>
                         <div className="relative group">
@@ -224,28 +224,28 @@ export function EWIAICallDemoForm() {
 
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.18 }} className="space-y-1.5">
                         <label htmlFor="ewiai-phone" className="text-xs font-medium text-gray-400 uppercase tracking-wide ml-1 block">Phone Number</label>
-                        <div className="relative group flex gap-0">
-                            <div className="relative flex-shrink-0">
+                        <div className="relative">
+                            <div className="flex items-center h-11 bg-white/[0.03] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500/30 focus-within:border-blue-500/50">
                                 <button type="button" onClick={(e) => { e.stopPropagation(); setShowCountryPicker(!showCountryPicker); }}
-                                    className="h-11 px-3 bg-white/[0.03] border border-white/10 border-r-0 rounded-l-xl flex items-center gap-1.5 hover:bg-white/[0.06] transition-colors whitespace-nowrap">
+                                    className="h-full pl-3.5 pr-2 flex items-center gap-1.5 hover:bg-white/[0.04] transition-colors whitespace-nowrap">
                                     <span className="text-lg leading-none">{selectedCountry.flag}</span><span className="text-sm text-gray-300">{selectedCountry.code}</span><ChevronDown className="w-3 h-3 text-gray-500" />
                                 </button>
-                                <AnimatePresence>
-                                    {showCountryPicker && (
-                                        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-                                            className="absolute top-full left-0 mt-1 z-50 bg-[#1a1a2e] border border-white/10 rounded-xl shadow-xl overflow-hidden min-w-[200px] max-h-[250px] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-                                            {countryCodes.map((country, idx) => (
-                                                <button key={`${country.country}-${idx}`} type="button" onClick={() => { setSelectedCountry(country); setShowCountryPicker(false); }}
-                                                    className={`w-full px-4 py-2.5 flex items-center gap-3 hover:bg-white/[0.06] transition-colors text-left ${selectedCountry.country === country.country ? 'bg-blue-500/10' : ''}`}>
-                                                    <span className="text-lg">{country.flag}</span><span className="text-sm text-white">{country.name}</span><span className="text-sm text-gray-500 ml-auto">{country.code}</span>
-                                                </button>
-                                            ))}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                <input id="ewiai-phone" type="tel" value={phoneNum} onChange={e => setPhoneNum(e.target.value)} placeholder="(555) 123-4567" onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)}
+                                    className="flex-1 min-w-0 bg-transparent text-white placeholder:text-white/25 h-full px-3 outline-none text-sm" />
                             </div>
-                            <input id="ewiai-phone" type="tel" value={phoneNum} onChange={e => setPhoneNum(e.target.value)} placeholder="(555) 123-4567" onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)}
-                                className="flex-1 min-w-0 bg-white/[0.03] border border-white/10 text-white placeholder:text-white/25 h-11 rounded-r-xl px-4 focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all duration-200 hover:border-white/20 outline-none text-sm" />
+                            <AnimatePresence>
+                                {showCountryPicker && (
+                                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+                                        className="absolute top-full left-0 mt-1 z-50 bg-[#1a1a2e] border border-white/10 rounded-xl shadow-xl overflow-hidden min-w-[200px] max-h-[250px] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                                        {countryCodes.map((country, idx) => (
+                                            <button key={`${country.country}-${idx}`} type="button" onClick={() => { setSelectedCountry(country); setShowCountryPicker(false); }}
+                                                className={`w-full px-4 py-2.5 flex items-center gap-3 hover:bg-white/[0.06] transition-colors text-left ${selectedCountry.country === country.country ? 'bg-blue-500/10' : ''}`}>
+                                                <span className="text-lg">{country.flag}</span><span className="text-sm text-white">{country.name}</span><span className="text-sm text-gray-500 ml-auto">{country.code}</span>
+                                            </button>
+                                        ))}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                         <AnimatePresence>{errors.phone && <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="text-xs text-red-400 ml-1">{errors.phone}</motion.p>}</AnimatePresence>
                     </motion.div>

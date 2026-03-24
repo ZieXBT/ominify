@@ -24,7 +24,7 @@ export default function CaseStudiesPage() {
                         className="text-center mb-16"
                     >
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                            Case <span className="bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent italic">studies</span>
+                            Case <span className="bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">Studies</span>
                         </h1>
                         <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
                             Real results, real clients. Discover the tangible impact of our outbound systems and the revenue growth our clients have achieved. Explore our case studies and see the numbers for yourself.
