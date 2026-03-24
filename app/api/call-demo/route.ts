@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 
 // ─── Rate Limiting ───────────────────────────────────────────
-const RATE_LIMIT_MAX = 3; // max submissions per IP
+const RATE_LIMIT_MAX = 3; // max submissions per IP per day
 const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+const TURNSTILE_REQUIRED_AFTER = 1; // require CAPTCHA after this many submissions
 
 // In-memory store: IP → array of timestamps
 const ipSubmissions = new Map<string, number[]>();
@@ -21,7 +22,14 @@ setInterval(() => {
     }
 }, 10 * 60 * 1000);
 
-function checkRateLimit(ip: string): { allowed: boolean; remaining: number } {
+function getSubmissionCount(ip: string): number {
+    const now = Date.now();
+    const timestamps = (ipSubmissions.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+    ipSubmissions.set(ip, timestamps);
+    return timestamps.length;
+}
+
+function recordSubmission(ip: string): { allowed: boolean; remaining: number } {
     const now = Date.now();
     const timestamps = (ipSubmissions.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
 
@@ -32,6 +40,34 @@ function checkRateLimit(ip: string): { allowed: boolean; remaining: number } {
     timestamps.push(now);
     ipSubmissions.set(ip, timestamps);
     return { allowed: true, remaining: RATE_LIMIT_MAX - timestamps.length };
+}
+
+// ─── Turnstile Verification ─────────────────────────────────
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
+
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+    if (!TURNSTILE_SECRET) {
+        console.warn('⚠️ Turnstile secret not configured. Skipping verification.');
+        return true;
+    }
+
+    try {
+        const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                secret: TURNSTILE_SECRET,
+                response: token,
+                remoteip: ip,
+            }),
+        });
+
+        const result = await response.json();
+        return result.success === true;
+    } catch (error) {
+        console.error('Turnstile verification error:', error);
+        return false;
+    }
 }
 
 // ─── Airtable configuration ─────────────────────────────────
@@ -103,15 +139,16 @@ async function checkDuplicateInAirtable(phone: string): Promise<boolean> {
 
 export async function POST(request: Request) {
     try {
-        // ─── Rate Limit Check ────────────────────────────
+        // ─── Get IP ──────────────────────────────────────
         const headersList = await headers();
         const ip = headersList.get('x-forwarded-for')?.split(',')[0]?.trim()
             || headersList.get('x-real-ip')
             || 'unknown';
 
-        const { allowed, remaining } = checkRateLimit(ip);
+        // ─── Check Rate Limit ────────────────────────────
+        const currentCount = getSubmissionCount(ip);
 
-        if (!allowed) {
+        if (currentCount >= RATE_LIMIT_MAX) {
             return NextResponse.json(
                 { error: 'Too many requests. Please try again tomorrow.' },
                 {
@@ -126,9 +163,27 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json();
-        const { name, phone, website, email } = body;
+        const { name, phone, website, email, turnstileToken } = body;
 
-        // Server-side validation
+        // ─── Turnstile Check (required on 2nd+ submission) ──
+        if (currentCount >= TURNSTILE_REQUIRED_AFTER) {
+            if (!turnstileToken) {
+                return NextResponse.json(
+                    { error: 'CAPTCHA verification required.', captcha_required: true },
+                    { status: 403 }
+                );
+            }
+
+            const isValid = await verifyTurnstile(turnstileToken, ip);
+            if (!isValid) {
+                return NextResponse.json(
+                    { error: 'CAPTCHA verification failed. Please try again.', captcha_required: true },
+                    { status: 403 }
+                );
+            }
+        }
+
+        // ─── Server-side validation ──────────────────────
         if (!name || name.trim().length < 2) {
             return NextResponse.json(
                 { error: 'Name must be at least 2 characters' },
@@ -154,6 +209,16 @@ export async function POST(request: Request) {
             return NextResponse.json(
                 { error: 'Please provide a valid email address' },
                 { status: 400 }
+            );
+        }
+
+        // ─── Record this submission ──────────────────────
+        const { allowed, remaining } = recordSubmission(ip);
+
+        if (!allowed) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please try again tomorrow.' },
+                { status: 429 }
             );
         }
 
@@ -194,7 +259,7 @@ export async function POST(request: Request) {
                 try {
                     const responseText = await webhookResponse.text();
                     console.error('Webhook error response:', responseText);
-                } catch (e) {
+                } catch {
                     console.error('Could not read webhook error response');
                 }
             }
@@ -205,6 +270,7 @@ export async function POST(request: Request) {
         return NextResponse.json({
             success: true,
             message: 'Demo call initiated! AI will call you shortly.',
+            remaining,
         });
     } catch (error) {
         console.error('Demo call request error:', error);
@@ -214,4 +280,3 @@ export async function POST(request: Request) {
         );
     }
 }
-

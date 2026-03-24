@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -79,6 +79,10 @@ export function CallDemoForm() {
     const [countdown, setCountdown] = useState(10);
     const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
     const [showCountryPicker, setShowCountryPicker] = useState(false);
+    const [showTurnstile, setShowTurnstile] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const turnstileRef = useRef<HTMLDivElement>(null);
+    const turnstileWidgetId = useRef<string | null>(null);
 
     const {
         register,
@@ -117,6 +121,44 @@ export function CallDemoForm() {
         }
     }, [showCountryPicker]);
 
+    // Load Turnstile script
+    useEffect(() => {
+        if (!showTurnstile) return;
+        if (document.getElementById('cf-turnstile-script')) return;
+
+        const script = document.createElement('script');
+        script.id = 'cf-turnstile-script';
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+        script.async = true;
+        document.head.appendChild(script);
+    }, [showTurnstile]);
+
+    // Render Turnstile widget
+    const renderTurnstile = useCallback(() => {
+        if (!turnstileRef.current || turnstileWidgetId.current) return;
+        const w = window as unknown as { turnstile?: { render: (el: HTMLElement, opts: Record<string, unknown>) => string } };
+        if (!w.turnstile) return;
+
+        turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
+            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '',
+            callback: (token: string) => setTurnstileToken(token),
+            'expired-callback': () => setTurnstileToken(null),
+            theme: 'dark',
+        });
+    }, []);
+
+    useEffect(() => {
+        if (!showTurnstile) return;
+        const w = window as unknown as { onTurnstileLoad?: () => void; turnstile?: unknown };
+        if (w.turnstile) {
+            renderTurnstile();
+        } else {
+            w.onTurnstileLoad = renderTurnstile;
+        }
+
+        return () => { w.onTurnstileLoad = undefined; };
+    }, [showTurnstile, renderTurnstile]);
+
     const onSubmit = async (data: CallDemoFormData) => {
         setSubmitError(null);
         try {
@@ -129,6 +171,7 @@ export function CallDemoForm() {
                 body: JSON.stringify({
                     ...data,
                     phone: fullPhone,
+                    turnstileToken: turnstileToken || undefined,
                 }),
             });
 
@@ -137,6 +180,10 @@ export function CallDemoForm() {
             if (!response.ok) {
                 if (response.status === 429) {
                     setSubmitError('You\'ve reached the daily limit (3 demos/day). Please try again tomorrow.');
+                } else if (response.status === 403 && result.captcha_required) {
+                    // Show Turnstile widget
+                    setShowTurnstile(true);
+                    setSubmitError('Please complete the verification below, then submit again.');
                 } else if (response.status === 409) {
                     setSubmitError('You\'ve already requested a demo call!');
                 } else {
@@ -527,6 +574,17 @@ export function CallDemoForm() {
                             </motion.div>
                         )}
                     </AnimatePresence>
+
+                    {/* Turnstile Widget */}
+                    {showTurnstile && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            className="flex justify-center"
+                        >
+                            <div ref={turnstileRef} />
+                        </motion.div>
+                    )}
 
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
