@@ -398,7 +398,7 @@ export function VoiceDemo() {
 
     const handlePlay = useCallback((index: number) => {
         if (activeDemo === index) {
-            if (audioRef.current && index === 0) {
+            if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current.currentTime = 0;
             }

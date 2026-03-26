@@ -1,5 +1,5 @@
 /* Custom fonts - must be first */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -16,7 +16,7 @@
   body {
     background-color: #0a0a0f;
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
