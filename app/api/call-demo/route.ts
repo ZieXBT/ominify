@@ -29,30 +29,24 @@ function createCookieValue(count: number): string {
     });
 }
 
-// ─── Turnstile Verification ─────────────────────────────────
-const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || '0x4AAAAAACvh8xuKAV5bnBWZ8RMfCBCu1_k';
+// ─── reCAPTCHA Verification ─────────────────────────────────
+const RECAPTCHA_SECRET = '6LcBP5ksAAAAAMaNWrQcPzGcMad1S6QBzNZW7Ltk';
 
-async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-    if (!TURNSTILE_SECRET) {
-        console.warn('⚠️ Turnstile secret not configured. Skipping verification.');
-        return true;
-    }
-
+async function verifyRecaptcha(token: string): Promise<boolean> {
     try {
-        const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
-                secret: TURNSTILE_SECRET,
+                secret: RECAPTCHA_SECRET,
                 response: token,
-                remoteip: ip,
             }),
         });
 
         const result = await response.json();
         return result.success === true;
     } catch (error) {
-        console.error('Turnstile verification error:', error);
+        console.error('reCAPTCHA verification error:', error);
         return false;
     }
 }
@@ -153,18 +147,18 @@ export async function POST(request: Request) {
         }
 
         const body = await request.json();
-        const { name, phone, website, email, turnstileToken } = body;
+        const { name, phone, website, email, recaptchaToken } = body;
 
-        // ─── Turnstile Check (required on 2nd+ submission) ──
+        // ─── reCAPTCHA Check (required on 2nd+ submission) ──
         if (currentCount >= TURNSTILE_REQUIRED_AFTER) {
-            if (!turnstileToken) {
+            if (!recaptchaToken) {
                 return NextResponse.json(
                     { error: 'CAPTCHA verification required.', captcha_required: true },
                     { status: 403 }
                 );
             }
 
-            const isValid = await verifyTurnstile(turnstileToken, ip);
+            const isValid = await verifyRecaptcha(recaptchaToken);
             if (!isValid) {
                 return NextResponse.json(
                     { error: 'CAPTCHA verification failed. Please try again.', captcha_required: true },
