@@ -37,6 +37,7 @@ const stats = [
     {
         value: 200,
         suffix: '+',
+        prefix: '',
         label: 'Businesses',
         sublabel: 'Automated',
         color: 'text-white',
@@ -44,6 +45,7 @@ const stats = [
     {
         value: 80,
         suffix: '%',
+        prefix: '',
         label: 'Sales Process',
         sublabel: 'Automated in 14 Days',
         color: 'text-blue-400',
@@ -52,6 +54,7 @@ const stats = [
     {
         value: 30,
         suffix: '%',
+        prefix: '',
         label: 'More Appointments',
         sublabel: 'Booked Monthly',
         color: 'text-white',
