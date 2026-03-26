@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Script from 'next/script';
 import { ArrowRight, Loader2, Phone, User, Mail, Globe, PhoneCall, ChevronDown } from 'lucide-react';
 
 const countryCodes = [
@@ -77,35 +78,33 @@ export function EWIAICallDemoForm() {
         }
     }, [showCountryPicker]);
 
-    // Load Turnstile script
-    useEffect(() => {
-        if (!showTurnstile) return;
-        if (document.getElementById('cf-turnstile-script')) return;
-        const script = document.createElement('script');
-        script.id = 'cf-turnstile-script';
-        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
-        script.async = true;
-        document.head.appendChild(script);
-    }, [showTurnstile]);
+    // Track if Turnstile script is loaded
+    const [turnstileScriptReady, setTurnstileScriptReady] = useState(false);
 
     const renderTurnstile = useCallback(() => {
         if (!turnstileRef.current || turnstileWidgetId.current) return;
         const w = window as unknown as { turnstile?: { render: (el: HTMLElement, opts: Record<string, unknown>) => string } };
         if (!w.turnstile) return;
-        turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
-            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '',
-            callback: (token: string) => setTurnstileToken(token),
-            'expired-callback': () => setTurnstileToken(null),
-            theme: 'dark',
-        });
+        try {
+            turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
+                sitekey: '0x4AAAAAACvh85-wNiA6efKB',
+                callback: (token: string) => setTurnstileToken(token),
+                'expired-callback': () => setTurnstileToken(null),
+                theme: 'dark',
+            });
+        } catch (e) {
+            console.error('Turnstile render error:', e);
+        }
     }, []);
 
+    // Render widget when both script is ready AND the container is mounted
     useEffect(() => {
-        if (!showTurnstile) return;
-        const w = window as unknown as { onTurnstileLoad?: () => void; turnstile?: unknown };
-        if (w.turnstile) { renderTurnstile(); } else { w.onTurnstileLoad = renderTurnstile; }
-        return () => { w.onTurnstileLoad = undefined; };
-    }, [showTurnstile, renderTurnstile]);
+        if (!showTurnstile || !turnstileScriptReady) return;
+        if (turnstileWidgetId.current) return;
+        // Small delay to ensure DOM ref is attached after conditional render
+        const timer = setTimeout(() => renderTurnstile(), 100);
+        return () => clearTimeout(timer);
+    }, [showTurnstile, turnstileScriptReady, renderTurnstile]);
 
     const validate = () => {
         const errs: Record<string, string> = {};
@@ -278,9 +277,19 @@ export function EWIAICallDemoForm() {
 
                     {/* Turnstile Widget */}
                     {showTurnstile && (
-                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="flex justify-center">
-                            <div ref={turnstileRef} />
-                        </motion.div>
+                        <>
+                            <Script
+                                src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+                                strategy="afterInteractive"
+                                onReady={() => setTurnstileScriptReady(true)}
+                            />
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="flex flex-col items-center gap-2 py-2">
+                                <div ref={turnstileRef} style={{ minHeight: '65px', minWidth: '300px' }} />
+                                {!turnstileToken && (
+                                    <p className="text-xs text-gray-500 animate-pulse">Loading verification...</p>
+                                )}
+                            </motion.div>
+                        </>
                     )}
 
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="pt-2">

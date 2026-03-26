@@ -30,7 +30,7 @@ function createCookieValue(count: number): string {
 }
 
 // ─── Turnstile Verification ─────────────────────────────────
-const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || '0x4AAAAAACvh8xuKAV5bnBWZ8RMfCBCu1_k';
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
     if (!TURNSTILE_SECRET) {
