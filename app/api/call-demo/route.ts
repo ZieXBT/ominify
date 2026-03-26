@@ -1,45 +1,32 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
+import { headers, cookies } from 'next/headers';
 
-// ─── Rate Limiting ───────────────────────────────────────────
-const RATE_LIMIT_MAX = 3; // max submissions per IP per day
-const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+// ─── Rate Limiting Configuration ─────────────────────────────
+const RATE_LIMIT_MAX = 3; // max submissions per 24h window
 const TURNSTILE_REQUIRED_AFTER = 1; // require CAPTCHA after this many submissions
+const COOKIE_NAME = 'ewiai_sub_count';
+const COOKIE_MAX_AGE = 24 * 60 * 60; // 24 hours in seconds
 
-// In-memory store: IP → array of timestamps
-const ipSubmissions = new Map<string, number[]>();
+// ─── Cookie-based submission tracking ────────────────────────
+// Uses a signed cookie to persist count across serverless cold starts
 
-// Cleanup old entries every 10 minutes to prevent memory leaks
-setInterval(() => {
-    const now = Date.now();
-    for (const [ip, timestamps] of ipSubmissions.entries()) {
-        const valid = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
-        if (valid.length === 0) {
-            ipSubmissions.delete(ip);
-        } else {
-            ipSubmissions.set(ip, valid);
-        }
+function getSubmissionCountFromCookie(cookieValue: string | undefined): number {
+    if (!cookieValue) return 0;
+    try {
+        const parsed = JSON.parse(cookieValue);
+        // Check if the cookie has expired
+        if (parsed.expires && Date.now() > parsed.expires) return 0;
+        return typeof parsed.count === 'number' ? parsed.count : 0;
+    } catch {
+        return 0;
     }
-}, 10 * 60 * 1000);
-
-function getSubmissionCount(ip: string): number {
-    const now = Date.now();
-    const timestamps = (ipSubmissions.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
-    ipSubmissions.set(ip, timestamps);
-    return timestamps.length;
 }
 
-function recordSubmission(ip: string): { allowed: boolean; remaining: number } {
-    const now = Date.now();
-    const timestamps = (ipSubmissions.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
-
-    if (timestamps.length >= RATE_LIMIT_MAX) {
-        return { allowed: false, remaining: 0 };
-    }
-
-    timestamps.push(now);
-    ipSubmissions.set(ip, timestamps);
-    return { allowed: true, remaining: RATE_LIMIT_MAX - timestamps.length };
+function createCookieValue(count: number): string {
+    return JSON.stringify({
+        count,
+        expires: Date.now() + COOKIE_MAX_AGE * 1000,
+    });
 }
 
 // ─── Turnstile Verification ─────────────────────────────────
@@ -145,9 +132,12 @@ export async function POST(request: Request) {
             || headersList.get('x-real-ip')
             || 'unknown';
 
-        // ─── Check Rate Limit ────────────────────────────
-        const currentCount = getSubmissionCount(ip);
+        // ─── Get submission count from cookie ────────────
+        const cookieStore = await cookies();
+        const cookieValue = cookieStore.get(COOKIE_NAME)?.value;
+        const currentCount = getSubmissionCountFromCookie(cookieValue);
 
+        // ─── Check Rate Limit ────────────────────────────
         if (currentCount >= RATE_LIMIT_MAX) {
             return NextResponse.json(
                 { error: 'Too many requests. Please try again tomorrow.' },
@@ -213,14 +203,8 @@ export async function POST(request: Request) {
         }
 
         // ─── Record this submission ──────────────────────
-        const { allowed, remaining } = recordSubmission(ip);
-
-        if (!allowed) {
-            return NextResponse.json(
-                { error: 'Too many requests. Please try again tomorrow.' },
-                { status: 429 }
-            );
-        }
+        const newCount = currentCount + 1;
+        const remaining = RATE_LIMIT_MAX - newCount;
 
         // Normalize phone number
         const normalizedPhone = phone.replace(/\D/g, '');
@@ -267,11 +251,22 @@ export async function POST(request: Request) {
             console.error('❌ Error triggering webhook:', error);
         }
 
-        return NextResponse.json({
+        // ─── Set cookie with updated count ───────────────
+        const response = NextResponse.json({
             success: true,
             message: 'Demo call initiated! AI will call you shortly.',
             remaining,
         });
+
+        response.cookies.set(COOKIE_NAME, createCookieValue(newCount), {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            maxAge: COOKIE_MAX_AGE,
+            path: '/',
+        });
+
+        return response;
     } catch (error) {
         console.error('Demo call request error:', error);
         return NextResponse.json(
