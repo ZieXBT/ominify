@@ -5,10 +5,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
+import Script from 'next/script';
 import { ArrowRight, Loader2, Phone, Sparkles, User, Mail, Globe, PhoneCall, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+const RECAPTCHA_SITE_KEY = '6LcBP5ksAAAAADrXb7byfYM1fvQ05YJGBE_9aNk4';
 
 // Country codes with flags
 const countryCodes = [
@@ -79,10 +82,10 @@ export function CallDemoForm() {
     const [countdown, setCountdown] = useState(10);
     const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
     const [showCountryPicker, setShowCountryPicker] = useState(false);
-    const [showTurnstile, setShowTurnstile] = useState(false);
-    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-    const turnstileRef = useRef<HTMLDivElement>(null);
-    const turnstileWidgetId = useRef<string | null>(null);
+    const [showRecaptcha, setShowRecaptcha] = useState(false);
+    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+    const recaptchaRef = useRef<HTMLDivElement>(null);
+    const recaptchaWidgetId = useRef<number | null>(null);
 
     const {
         register,
@@ -121,43 +124,32 @@ export function CallDemoForm() {
         }
     }, [showCountryPicker]);
 
-    // Load Turnstile script
-    useEffect(() => {
-        if (!showTurnstile) return;
-        if (document.getElementById('cf-turnstile-script')) return;
+    // Track if reCAPTCHA script is loaded
+    const [recaptchaScriptReady, setRecaptchaScriptReady] = useState(false);
 
-        const script = document.createElement('script');
-        script.id = 'cf-turnstile-script';
-        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
-        script.async = true;
-        document.head.appendChild(script);
-    }, [showTurnstile]);
-
-    // Render Turnstile widget
-    const renderTurnstile = useCallback(() => {
-        if (!turnstileRef.current || turnstileWidgetId.current) return;
-        const w = window as unknown as { turnstile?: { render: (el: HTMLElement, opts: Record<string, unknown>) => string } };
-        if (!w.turnstile) return;
-
-        turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
-            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '',
-            callback: (token: string) => setTurnstileToken(token),
-            'expired-callback': () => setTurnstileToken(null),
-            theme: 'dark',
-        });
+    // Render reCAPTCHA widget
+    const renderRecaptcha = useCallback(() => {
+        if (!recaptchaRef.current || recaptchaWidgetId.current !== null) return;
+        const w = window as unknown as { grecaptcha?: { render: (el: HTMLElement, opts: Record<string, unknown>) => number } };
+        if (!w.grecaptcha?.render) return;
+        try {
+            recaptchaWidgetId.current = w.grecaptcha.render(recaptchaRef.current, {
+                sitekey: RECAPTCHA_SITE_KEY,
+                callback: (token: string) => setRecaptchaToken(token),
+                'expired-callback': () => setRecaptchaToken(null),
+                theme: 'dark',
+            });
+        } catch (e) {
+            console.error('reCAPTCHA render error:', e);
+        }
     }, []);
 
     useEffect(() => {
-        if (!showTurnstile) return;
-        const w = window as unknown as { onTurnstileLoad?: () => void; turnstile?: unknown };
-        if (w.turnstile) {
-            renderTurnstile();
-        } else {
-            w.onTurnstileLoad = renderTurnstile;
-        }
-
-        return () => { w.onTurnstileLoad = undefined; };
-    }, [showTurnstile, renderTurnstile]);
+        if (!showRecaptcha || !recaptchaScriptReady) return;
+        if (recaptchaWidgetId.current !== null) return;
+        const timer = setTimeout(() => renderRecaptcha(), 200);
+        return () => clearTimeout(timer);
+    }, [showRecaptcha, recaptchaScriptReady, renderRecaptcha]);
 
     const onSubmit = async (data: CallDemoFormData) => {
         setSubmitError(null);
@@ -171,7 +163,7 @@ export function CallDemoForm() {
                 body: JSON.stringify({
                     ...data,
                     phone: fullPhone,
-                    turnstileToken: turnstileToken || undefined,
+                    recaptchaToken: recaptchaToken || undefined,
                 }),
             });
 
@@ -181,8 +173,8 @@ export function CallDemoForm() {
                 if (response.status === 429) {
                     setSubmitError('You\'ve reached the daily limit (3 demos/day). Please try again tomorrow.');
                 } else if (response.status === 403 && result.captcha_required) {
-                    // Show Turnstile widget
-                    setShowTurnstile(true);
+                    // Show reCAPTCHA widget
+                    setShowRecaptcha(true);
                     setSubmitError('Please complete the verification below, then submit again.');
                 } else if (response.status === 409) {
                     setSubmitError('You\'ve already requested a demo call!');
@@ -575,15 +567,25 @@ export function CallDemoForm() {
                         )}
                     </AnimatePresence>
 
-                    {/* Turnstile Widget */}
-                    {showTurnstile && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            className="flex justify-center"
-                        >
-                            <div ref={turnstileRef} />
-                        </motion.div>
+                    {/* Google reCAPTCHA v2 Widget */}
+                    {showRecaptcha && (
+                        <>
+                            <Script
+                                src="https://www.google.com/recaptcha/api.js?render=explicit"
+                                strategy="afterInteractive"
+                                onReady={() => setRecaptchaScriptReady(true)}
+                            />
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                className="flex flex-col items-center gap-2 py-2"
+                            >
+                                <div ref={recaptchaRef} style={{ minHeight: '78px' }} />
+                                {!recaptchaToken && recaptchaWidgetId.current === null && (
+                                    <p className="text-xs text-gray-500 animate-pulse">Loading verification...</p>
+                                )}
+                            </motion.div>
+                        </>
                     )}
 
                     <motion.div
