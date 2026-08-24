@@ -22,9 +22,11 @@ export const metadata: Metadata = {
     title: "ElevateWithAI — AI Voice Agents for Sales & Support",
     description: "Book 30% more appointments with AI that sounds 100% human.",
   },
+  // The real site is ewiai.com (separate repo/project). This copy exists
+  // only so the route keeps working; keep it out of every index.
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 };
 

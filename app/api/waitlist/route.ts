@@ -70,10 +70,3 @@ export async function POST(request: Request) {
         );
     }
 }
-
-export async function GET() {
-    // Return current waitlist count (for admin/demo purposes)
-    return NextResponse.json({
-        count: waitlistEmails.size,
-    });
-}

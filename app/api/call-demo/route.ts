@@ -30,9 +30,13 @@ function createCookieValue(count: number): string {
 }
 
 // ─── reCAPTCHA Verification ─────────────────────────────────
-const RECAPTCHA_SECRET = '6LcBP5ksAAAAAMaNWrQcPzGcMad1S6QBzNZW7Ltk';
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
 
 async function verifyRecaptcha(token: string): Promise<boolean> {
+    if (!RECAPTCHA_SECRET) {
+        console.error('RECAPTCHA_SECRET_KEY is not set');
+        return false;
+    }
     try {
         const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
             method: 'POST',
