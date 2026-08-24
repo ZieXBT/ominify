@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 
+import { SITE_URL } from "@/lib/site";
+
 const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
@@ -9,6 +11,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Omnify — AI-Powered CRM for Contractors | Join Waitlist",
   description: "Never miss another lead. AI that answers calls, texts, and chat 24/7. Join the waitlist and get 50% off for life.",
   keywords: ["AI CRM", "contractor software", "lead management", "AI receptionist", "service contractors"],
